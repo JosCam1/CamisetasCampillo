@@ -24,3 +24,30 @@
     </a>
   </div>
 </div>
+
+<div class="container" style="margin-top: 15px; margin-bottom: 15px;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Precio</th>
+        <th>Foto</th>
+        <th>Marca</th>
+        <th>Descuento</th>
+        <th>Descripcion</th>
+        <th>Liga</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let camiseta of camisetas; let i = index">
+        <td>{{ camiseta.id }}</td>
+        <td>{{ camiseta.precio }}</td>
+        <td>{{ camiseta.foto }}</td>
+        <td>{{ camiseta.marca.nombre }}</td>
+        <td>{{ camiseta.decuento }}</td>
+        <td>{{ camiseta.descripcion }}</td>
+        <td>{{ camiseta.liga.nombre }}</td>
+      </tr>
+    </tbody>
+    </table>
+    </div>

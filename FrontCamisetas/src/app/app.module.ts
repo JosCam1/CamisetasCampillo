@@ -9,6 +9,7 @@ import { CamisetasComponent } from './paginas/camisetas/camisetas.component';
 import { LigasComponent } from './paginas/ligas/ligas.component';
 import { MarcasComponent } from './paginas/marcas/marcas.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CamisetasService } from './servicios/camisetas.service';
 
 @NgModule({
   declarations: [

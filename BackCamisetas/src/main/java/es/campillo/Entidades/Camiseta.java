@@ -35,7 +35,4 @@ public class Camiseta {
     @JoinColumn(name = "marca_id")
     private Marca marca;
 
-    @ManyToOne
-    @JoinColumn(name = "equipo_id")
-    private Equipo equipo;
 }

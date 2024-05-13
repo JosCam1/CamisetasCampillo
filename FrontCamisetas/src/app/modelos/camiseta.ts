@@ -10,6 +10,5 @@ export class Camiseta {
     foto!:string;
     liga!:Liga;
     marca!:Marca;
-    equipo!:Equipo;
 
 }
