@@ -3,6 +3,8 @@ package es.campillo.Entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Blob;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,6 +19,10 @@ public class Equipo {
 
     @Column(name = "Nombre", nullable = false)
     private String nombre;
+
+    @Lob
+    @Column(name = "Foto", nullable = false)
+    private Blob foto;
 
     @ManyToOne
     @JoinColumn(name = "liga_id")

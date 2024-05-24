@@ -7,7 +7,7 @@ import { Camiseta } from '../modelos/camiseta';
   providedIn: 'root'
 })
 export class CamisetasService implements OnInit{
-  APIurl = "https://localhost:8080/camisetas";
+  APIurl = "http://localhost:8080/camisetas/";
 
   constructor(private httpClient:HttpClient) { }
 
@@ -15,8 +15,8 @@ export class CamisetasService implements OnInit{
     throw new Error('Method not implemented.');
   }
 
-  public obtenerEmpleados():Observable<Camiseta[]>{
-    return this.httpClient.get<Camiseta[]>(this.APIurl);
+  public obtenerCamisetas():Observable<Camiseta[]>{
+    return this.httpClient.get<Camiseta[]>(`${this.APIurl}`);
   }
 
 

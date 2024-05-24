@@ -3,6 +3,8 @@ package es.campillo.Entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Blob;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -38,6 +40,10 @@ public class Usuario {
 
     @Column(name = "Password", nullable = false)
     private String password;
+
+    @Lob
+    @Column(name = "Foto", nullable = false)
+    private Blob foto;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")

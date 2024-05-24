@@ -1,0 +1,41 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
+    </div>
+    <div class="input-group mb-3">
+      <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
+      <label class="input-group-text" for="foto">Seleccionar archivo</label>
+    </div>
+    <button type="submit" class="btn btn-primary d-block mx-auto">Insertar Liga</button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Foto</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let liga of Ligas">
+          <td>{{ liga.id }}</td>
+          <td>{{ liga.nombre }}</td>
+          <td>
+            <img [src]="'data:image/jpeg;base64,' + liga.foto" alt="Foto de {{ liga.nombre }}" style="width: 50px; height: 50px;">
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger mr-1" (click)="eliminarLiga(liga.id)">Eliminar</button>
+            <button type="button" class="btn btn-secondary">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -2,6 +2,7 @@ package es.campillo.Entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -17,4 +18,8 @@ public class Liga {
 
     @Column(name = "Nombre", nullable = false)
     private String nombre;
+
+    @Lob
+    @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
+    private byte[] foto;
 }

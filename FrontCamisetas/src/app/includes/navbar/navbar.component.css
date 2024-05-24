@@ -1,48 +1,91 @@
-body{
-    background-color:purple;
-}
-.form-inputs{
-    position:relative;
-}
-.form-inputs .form-control{
-    height:45px; 
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.form-inputs .form-control:focus{
-    box-shadow:none;
-    border:1px solid #000;
+.navbar-nav .nav-item {
+    padding: 0 10px;
 }
 
-.form-inputs i{
-    position:absolute;
-    right:10px;
-    top:15px;
+body {
+    background-color: purple;
 }
 
-.shop-bag{
-    background-color:#000;
-    color:#fff;
-    height:50px;
-    width:50px;
-    font-size:25px;
-    display:flex;
-    border-radius:50%;
-    align-items:center;
-    justify-content:center;
+.form-inputs {
+    position: relative;
+    margin-left: auto;
 }
 
-.qty{
-    font-size:12px;
+.form-inputs .form-control {
+    height: 45px;
 }
-.navbar-dark{
+
+.form-inputs .form-control:focus {
+    box-shadow: none;
+    border: 1px solid #000;
+}
+
+.form-inputs i {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+.shop-bag {
+    background-color: #000;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    font-size: 25px;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty {
+    font-size: 12px;
+}
+
+.navbar-dark {
     background-color: #d90148;
 }
+
 #shop-bag-icon {
     color: #d90148;
-  }
-  
-  .shop-bag {
-    background-color: white; 
-    border-radius: 50%; 
+    font-size: 24px;
+}
+
+.shop-bag {
+    background-color: white;
+    border-radius: 50%;
     padding: 5px;
-  }
+}
+
+.col-md-2 img {
+    max-width: 100%;
+    height: auto;
+}
+
+.navbar-nav .nav-item .nav-link {
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #d90148;
+}
+
+.text-end .btn {
+    margin-right: 10px;
+}
+
+@media (min-width: 992px) {
+    .navbar-toggler {
+        display: none;
+    }
+
+    .navbar-collapse {
+        display: block !important;
+    }
+}

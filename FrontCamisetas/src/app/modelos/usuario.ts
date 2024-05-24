@@ -10,5 +10,6 @@ export class Usuario {
     direccion!:string;
     email!:string;
     password!:string;
+    foto!:Blob;
     rol!:Rol;
 }

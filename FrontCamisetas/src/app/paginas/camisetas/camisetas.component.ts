@@ -15,11 +15,11 @@ export class CamisetasComponent implements OnInit {
   constructor(private servicio:CamisetasService) { }
 
   ngOnInit() {
-    
+    this.obtenerCamisetas();
   }
 
   obtenerCamisetas(){
-    this.servicio.obtenerEmpleados().subscribe(
+    this.servicio.obtenerCamisetas().subscribe(
       (data: Camiseta[]) => {
         this.camisetas = data;
       },
@@ -27,6 +27,7 @@ export class CamisetasComponent implements OnInit {
         console.error("Error encontrando camisetas: ", error)
       }
     )
+    console.log(this.camisetas);
   }
 
 }

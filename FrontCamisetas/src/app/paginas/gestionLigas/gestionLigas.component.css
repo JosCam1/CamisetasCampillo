@@ -1,0 +1,16 @@
+tr,td,th{
+    text-align: center;
+}
+button{
+    background-color: #D90148;
+    color: white;
+}
+thead{
+    background-color: #D90148;
+}
+.linea:hover{
+    opacity: 0.6;
+}
+.input-group-text {
+    cursor: pointer;
+  }
