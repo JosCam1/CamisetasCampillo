@@ -4,12 +4,12 @@ export class Usuario {
     id!:number;
     nombre!:string;
     apellido!:string;
-    codigoPosta!:number;
+    codigoPostal!:string;
     telefono!:number;
     ciudad!:string;
     direccion!:string;
     email!:string;
     password!:string;
-    foto!:Blob;
+    foto!:string;
     rol!:Rol;
 }

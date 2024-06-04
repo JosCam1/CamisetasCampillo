@@ -24,7 +24,7 @@ public class Usuario {
     private String apellido;
 
     @Column(name = "CodigoPostal", nullable = false)
-    private int codigoPostal;
+    private String codigoPostal;
 
     @Column(name = "Telefono", nullable = false, length = 9)
     private int telefono;
@@ -42,8 +42,8 @@ public class Usuario {
     private String password;
 
     @Lob
-    @Column(name = "Foto", nullable = false)
-    private Blob foto;
+    @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
+    private byte[] foto;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")

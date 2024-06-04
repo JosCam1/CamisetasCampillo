@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/camisetas/")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CamisetasController {
     @Autowired
     RepositorioCamisetas respositorioCamisetas;

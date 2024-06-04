@@ -1,0 +1,92 @@
+.login-block {
+    background: #FFB88C;
+    background: linear-gradient(to bottom, #FFB88C, #DE6262);
+    padding: 50px 0;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del formulario */
+.login-sec {
+    padding: 50px 30px;
+}
+
+.login-sec h2 {
+    margin-bottom: 30px;
+    font-weight: 800;
+    font-size: 30px;
+    color: #DE6262;
+    position: relative;
+}
+
+.login-sec h2:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: #FEB58A;
+    border-radius: 3px;
+}
+
+.login-form label {
+    text-transform: uppercase;
+}
+
+.btn-login {
+    background: #DE6262;
+    color: #fff;
+    font-weight: 600;
+}
+
+.banner-sec {
+    background-color: white;
+    background-size: cover;
+    min-height: 500px;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-text {
+    width: 70%;
+    padding-left: 20px;
+}
+
+.banner-text h2 {
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+}
+
+.banner-text h2:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.banner-text p {
+    color: #fff;
+}
+.form-check {
+    display: flex;
+    justify-content: center; 
+}
+.copy-text{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center; 
+}

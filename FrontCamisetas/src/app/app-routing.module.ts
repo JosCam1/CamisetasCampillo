@@ -7,6 +7,8 @@ import { GestionLigasComponent } from './paginas/gestionLigas/gestionLigas.compo
 import { GestionMarcasComponent } from './paginas/gestionMarcas/gestionMarcas.component';
 import { GestionCamisetasComponent } from './paginas/gestionCamisetas/gestionCamisetas.component';
 import { GestionEquiposComponent } from './paginas/gestionEquipos/gestionEquipos.component';
+import { LoginComponent } from './paginas/login/login.component';
+import { RegistroComponent } from './paginas/registro/registro.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'gestionEquipos',
     component: GestionEquiposComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegistroComponent
   }
 ];
 

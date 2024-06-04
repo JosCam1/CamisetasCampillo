@@ -33,7 +33,6 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
       this.servicio.obtenerLigas().subscribe(
         (data: Liga[]) => {
           this.Ligas = data;
-          console.log(this.Ligas);
         },
         (error) => {
           console.error("Error encontrando ligas: ", error);
@@ -89,6 +88,7 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
         this.servicio.eliminarLiga(id).subscribe(
           () => {
             alert("¡Liga eliminada exitosamente!");
+            this.loadLigas();
           },
           error => {
             console.error("Error eliminando liga:", error);

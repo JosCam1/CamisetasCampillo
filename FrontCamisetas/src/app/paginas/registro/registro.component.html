@@ -1,0 +1,90 @@
+<section class="login-block">
+  <div class="container">
+    <div class="row align-items-stretch">
+      <div class="col-md-12 login-sec">
+        <h2 class="text-center">Registro</h2>
+        <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nombre" class="text-uppercase">Nombre</label>
+                <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                  required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="apellido" class="text-uppercase">Apellido</label>
+                <input type="text" formControlName="apellido" class="form-control" id="apellido" placeholder="Apellido"
+                  required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="codigoPostal" class="text-uppercase">Código Postal</label>
+                <input type="text" formControlName="codigoPostal" class="form-control" id="codigoPostal"
+                  placeholder="Código Postal" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="telefono" class="text-uppercase">Teléfono</label>
+                <input type="tel" formControlName="telefono" class="form-control" id="telefono" placeholder="Teléfono"
+                  required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ciudad" class="text-uppercase">Ciudad</label>
+                <input type="text" formControlName="ciudad" class="form-control" id="ciudad" placeholder="Ciudad"
+                  required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="direccion" class="text-uppercase">Dirección</label>
+                <input type="text" formControlName="direccion" class="form-control" id="direccion"
+                  placeholder="Dirección" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email" class="text-uppercase">Email</label>
+                <input type="email" formControlName="email" class="form-control" id="email"
+                  placeholder="miemail@gmail.com" required>
+                <div *ngIf="emailError" class="alert alert-danger alerta" role="alert">{{ emailError }}</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="password" class="text-uppercase">Contraseña</label>
+                <input type="password" formControlName="password" class="form-control" id="password"
+                  placeholder="*********" required>
+                <div *ngIf="formSubmitted && registroForm.controls['password'].invalid"
+                  class="alert alert-danger alerta" role="alert">
+                  La contraseña debe tener al menos 6 caracteres.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="fotoPerfil" class="text-uppercase">Foto de Perfil</label>
+                <input type="file" formControlName="fotoPerfil" class="form-control" id="fotoPerfil" required
+                  (change)="onFileSelected($event)">
+              </div>
+            </div>
+          </div>
+          <div class="form-check">
+            <button type="submit" class="btn btn-login float-right">Enviar</button>
+          </div>
+          </form>
+    </div>
+  </div>
+  </div>
+</section>

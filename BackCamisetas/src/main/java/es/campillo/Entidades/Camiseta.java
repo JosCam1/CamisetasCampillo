@@ -27,8 +27,8 @@ public class Camiseta {
     private double descuento;
 
     @Lob
-    @Column(name = "Foto", nullable = false)
-    private Blob foto;
+    @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
+    private byte[] foto;
 
     @ManyToOne
     @JoinColumn(name = "liga_id")

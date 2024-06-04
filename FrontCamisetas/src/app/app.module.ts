@@ -16,12 +16,14 @@ import { GestionEquiposComponent } from './paginas/gestionEquipos/gestionEquipos
 import { GestionMarcasComponent } from './paginas/gestionMarcas/gestionMarcas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GestionLigasComponent } from './paginas/gestionLigas/gestionLigas.component';
+import { LoginComponent } from './paginas/login/login.component';
+import { RegistroComponent } from './paginas/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,NavbarComponent,FooterComponent,CamisetasComponent,
     LigasComponent,MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent, 
-     GestionMarcasComponent, GestionLigasComponent
+     GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent
   ],
   imports: [
     BrowserModule,

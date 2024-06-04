@@ -3,3 +3,7 @@
     height: 100%;
     object-fit: cover;
 }
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+  }

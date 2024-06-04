@@ -8,7 +8,7 @@
       <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
       <label class="input-group-text" for="foto">Seleccionar archivo</label>
     </div>
-    <button type="submit" class="btn btn-primary d-block mx-auto">Insertar Liga</button>
+    <button type="submit" class="btn btn-danger mr-1 d-block mx-auto insertar">Insertar Liga</button>
   </form>
 </div>
 
@@ -31,8 +31,8 @@
             <img [src]="'data:image/jpeg;base64,' + liga.foto" alt="Foto de {{ liga.nombre }}" style="width: 50px; height: 50px;">
           </td>
           <td>
-            <button type="button" class="btn btn-danger mr-1" (click)="eliminarLiga(liga.id)">Eliminar</button>
-            <button type="button" class="btn btn-secondary">Editar</button>
+            <button type="button" class="btn" (click)="eliminarLiga(liga.id)" style="background-color: rgb(243, 49, 49); margin-right: 10px; color: white;">Eliminar</button>
+            <button type="button" class="btn" (click)="eliminarLiga(liga.id)" style="background-color: rgb(91, 228, 228);color: white;">Editar</button>
           </td>
         </tr>
       </tbody>

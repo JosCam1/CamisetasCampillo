@@ -39,7 +39,7 @@ public class LigasController {
         return repositorioLigas.findAll();
     }
 
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarLiga(@PathVariable Long id) {
         if (repositorioLigas.existsById(id)) {
             repositorioLigas.deleteById(id);

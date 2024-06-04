@@ -21,6 +21,6 @@ public class Marca {
     private String nombre;
 
     @Lob
-    @Column(name = "Foto", nullable = false)
-    private Blob foto;
+    @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
+    private byte[] foto;
 }
