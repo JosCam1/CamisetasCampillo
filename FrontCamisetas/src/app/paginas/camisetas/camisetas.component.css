@@ -3,7 +3,60 @@
     height: 100%;
     object-fit: cover;
 }
+
 .card-img-top {
     height: 300px;
     object-fit: cover;
-  }
+}
+
+.fotoCamiseta {
+    height: 400px;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px gray;
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.pagination .page-link {
+    color: #d90148;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: white;
+    color: #d90148;
+    border: 0.5px solid #d90148;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.pagination button.active {
+    background-color: #d90148;
+    color: white;
+    border: 1px solid #d90148;
+}
+
+.btn-borrar {
+    background-color: #d90148;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-borrar:hover {
+    background-color: #b3003d;
+}

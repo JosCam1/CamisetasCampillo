@@ -17,9 +17,9 @@ export class RegistroComponent implements OnInit {
   usuario: Usuario = new Usuario(); 
   roles: Rol[] = [];
   fotoBase64: string = '';
-  emailError: string = ''; // Añadido para almacenar el mensaje de error del email
-  formSubmitted: boolean = false; // Añadido para controlar si el formulario ha sido enviado
-
+  emailError: string = ''; 
+  formSubmitted: boolean = false; 
+  
   constructor(private fb: FormBuilder, private servicioRol: RolesService, private servicioUsuario: UsuariosService, private router: Router) {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -29,7 +29,7 @@ export class RegistroComponent implements OnInit {
       ciudad: ['', Validators.required],
       direccion: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]], // Actualizado con la validación de longitud mínima
+      password: ['', [Validators.required, Validators.minLength(6)]],
       fotoPerfil: ['', Validators.required]
     });
   }
@@ -50,7 +50,7 @@ export class RegistroComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.formSubmitted = true; // Marcar el formulario como enviado
+    this.formSubmitted = true; 
     if (this.registroForm.valid) {
       this.usuario.nombre = this.registroForm.value.nombre;
       this.usuario.apellido = this.registroForm.value.apellido;
@@ -59,14 +59,14 @@ export class RegistroComponent implements OnInit {
       this.usuario.ciudad = this.registroForm.value.ciudad;
       this.usuario.direccion = this.registroForm.value.direccion;
       this.usuario.email = this.registroForm.value.email;
-      this.usuario.password = await this.hashSHA256(this.registroForm.value.password);
+      this.usuario.password = this.registroForm.value.password;
       this.usuario.foto = this.fotoBase64;
       this.usuario.rol = this.roles[0];
 
       this.servicioUsuario.buscarUsuarioPorEmail(this.usuario.email).subscribe(
         existe => {
           if (existe) {
-            this.emailError = "El correo electrónico ya está registrado."; // Mostrar mensaje de error
+            this.emailError = "El correo electrónico ya está registrado.";
           } else {
             this.servicioUsuario.insertarUsuario(this.usuario).subscribe(
               response => {
@@ -109,18 +109,5 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-  async hashSHA256(password: string): Promise<string> {
-    const crypto = window.crypto || (window as any).msCrypto;
-    if (crypto) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(password);
-      const buffer = await crypto.subtle.digest('SHA-256', data);
-      const hashArray = Array.from(new Uint8Array(buffer)); 
-      const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join(''); 
-      return hashHex;
-    } else {
-      console.error("El navegador no es compatible con la API de Web Crypto");
-      return ''; 
-    }
-  }
+  
 }

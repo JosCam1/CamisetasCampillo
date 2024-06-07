@@ -16,6 +16,8 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
   cuadroFoto: string = '';
   Ligas: Liga[] = [];
   fotoBase64: string = '';
+  editando: boolean = false;
+  ligaId!:number;
   private subscription: Subscription = new Subscription();
 
   constructor(private servicio: LigasService, private route: ActivatedRoute) { }
@@ -83,7 +85,7 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
   }
 
   eliminarLiga(id: number) {
-    if (confirm("¿Estás seguro de que quieres eliminar esta liga?")) {
+    if (confirm("¿Estás seguro de que quieres eliminar la liga?")) {
       this.subscription.add(
         this.servicio.eliminarLiga(id).subscribe(
           () => {
@@ -98,4 +100,53 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+  editarLiga(id: number): void {
+    this.editando=true;
+    this.subscription.add(
+      this.servicio.obtenerLigaById(id).subscribe(
+        liga => {
+          this.cuadroNombre = liga.nombre;
+          this.cuadroFoto = liga.foto;
+          // Asignar el ID de la liga a una propiedad del componente
+          this.ligaId = liga.id;
+        },
+        error => {
+          console.error("Error obteniendo información de la liga:", error);
+          alert("¡No se pudo obtener la información de la liga!");
+        }
+      )
+    );
+  }
+  
+  onSubmitEdit(): void {
+    this.editando=false;
+    const ligaActualizada: Liga = {
+      id: this.ligaId, 
+      nombre: this.cuadroNombre,
+      foto: this.cuadroFoto 
+    };
+  
+    // Llamar al servicio para actualizar la liga en el backend
+    this.subscription.add(
+      this.servicio.actualizarLiga(ligaActualizada).subscribe(
+        () => {
+          // Limpia los campos del formulario
+          this.cuadroNombre = '';
+          this.cuadroFoto = '';
+  
+          // Vuelve a cargar la lista de ligas actualizada
+          this.loadLigas();
+  
+          // Mostrar un mensaje de éxito
+          alert("¡Liga actualizada exitosamente!");
+        },
+        error => {
+          console.error("Error actualizando liga:", error);
+          alert("¡No se pudo actualizar la liga!");
+        }
+      )
+    );
+  }
+  
 }

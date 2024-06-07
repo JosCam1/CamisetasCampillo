@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GestionLigasComponent } from './paginas/gestionLigas/gestionLigas.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { RegistroComponent } from './paginas/registro/registro.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RegistroComponent } from './paginas/registro/registro.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     provideClientHydration()

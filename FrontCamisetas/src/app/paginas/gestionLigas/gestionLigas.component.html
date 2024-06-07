@@ -1,5 +1,5 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
+  <form (ngSubmit)="editando ? onSubmitEdit() : onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre:</label>
       <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
@@ -8,7 +8,9 @@
       <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
       <label class="input-group-text" for="foto">Seleccionar archivo</label>
     </div>
-    <button type="submit" class="btn btn-danger mr-1 d-block mx-auto insertar">Insertar Liga</button>
+    <button type="submit" class="btn btn-danger mr-1 d-block mx-auto" [class.insertar]="!editando" [class.actualizar]="editando">
+      {{ editando ? 'Actualizar Liga' : 'Insertar Liga' }}
+    </button>
   </form>
 </div>
 
@@ -32,7 +34,7 @@
           </td>
           <td>
             <button type="button" class="btn" (click)="eliminarLiga(liga.id)" style="background-color: rgb(243, 49, 49); margin-right: 10px; color: white;">Eliminar</button>
-            <button type="button" class="btn" (click)="eliminarLiga(liga.id)" style="background-color: rgb(91, 228, 228);color: white;">Editar</button>
+            <button type="button" class="btn" (click)="editarLiga(liga.id)" style="background-color: rgb(91, 228, 228);color: white;">Editar</button>
           </td>
         </tr>
       </tbody>

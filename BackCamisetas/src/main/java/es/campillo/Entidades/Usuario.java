@@ -42,7 +42,7 @@ public class Usuario {
     private String password;
 
     @Lob
-    @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
+    @Column(name = "Foto", columnDefinition = "longblob", nullable = true)
     private byte[] foto;
 
     @ManyToOne

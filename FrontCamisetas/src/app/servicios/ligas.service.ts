@@ -24,4 +24,10 @@ eliminarLiga(id:number):Observable<Liga>{
   return this.httpClient.delete<Liga>(`${this.APIurl}${id}`);
 }
 
+public obtenerLigaById(id: number): Observable<Liga> {
+  return this.httpClient.get<Liga>(`${this.APIurl}${id}`);
+}
+public actualizarLiga(liga: Liga): Observable<void> {
+  return this.httpClient.put<void>(`${this.APIurl}${liga.id}`, liga);
+}
 }

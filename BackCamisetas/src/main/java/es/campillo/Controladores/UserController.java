@@ -3,6 +3,7 @@ package es.campillo.Controladores;
 import es.campillo.Entidades.Usuario;
 import es.campillo.Respositorios.RepositorioUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
@@ -16,9 +17,13 @@ public class UserController {
     @Autowired
     RepositorioUsuarios repositorioUsuarios;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/")
     public Usuario insertarUsuario(@RequestBody Usuario usuario){
         Optional<Usuario> usuarioExistente = repositorioUsuarios.findByEmail(usuario.getEmail());
+        String passwordEncriptada = passwordEncoder.encode(usuario.getPassword());
         if (usuarioExistente.isPresent()) {
             throw new IllegalArgumentException("El correo electrónico ya está registrado");
         }
@@ -28,6 +33,7 @@ public class UserController {
         try {
             byte[] imagenDecodificada = Base64.getDecoder().decode(fotoBase64Limpia);
             usuario.setFoto(imagenDecodificada);
+            usuario.setPassword(passwordEncriptada);
             return repositorioUsuarios.save(usuario);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -40,4 +46,5 @@ public class UserController {
         List<Usuario> usuarios = repositorioUsuarios.findAll();
         return usuarios.stream().anyMatch(usuario -> usuario.getEmail().equals(email));
     }
+
 }
