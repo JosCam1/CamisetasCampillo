@@ -1,9 +1,10 @@
 package es.campillo.BackCamisetas;
 
+import es.campillo.Entidades.Liga;
+import es.campillo.Entidades.Marca;
 import es.campillo.Entidades.Rol;
 import es.campillo.Entidades.Usuario;
-import es.campillo.Respositorios.RepositorioRoles;
-import es.campillo.Respositorios.RepositorioUsuarios;
+import es.campillo.Respositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,12 +38,20 @@ class DataLoader implements CommandLineRunner {
 
 	private final RepositorioRoles repositorioRoles;
 	private final RepositorioUsuarios repositorioUsuarios;
+	private final RepositorioMarcas repositorioMarcas;
+	private final RepositorioLigas repositorioLigas;
+	private final RepositorioCamisetas repositorioCamisetas;
 	private final PasswordEncoder passwordEncoder;
 
+
+
 	@Autowired
-	public DataLoader(RepositorioRoles repositorioRoles, RepositorioUsuarios repositorioUsuarios, PasswordEncoder passwordEncoder) {
+	public DataLoader(RepositorioRoles repositorioRoles, RepositorioUsuarios repositorioUsuarios, PasswordEncoder passwordEncoder, RepositorioMarcas repositorioMarcas,RepositorioLigas repositorioLigas, RepositorioCamisetas repositorioCamisetas) {
 		this.repositorioRoles = repositorioRoles;
 		this.repositorioUsuarios = repositorioUsuarios;
+		this.repositorioMarcas = repositorioMarcas;
+		this.repositorioLigas = repositorioLigas;
+		this.repositorioCamisetas = repositorioCamisetas;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -53,6 +62,12 @@ class DataLoader implements CommandLineRunner {
 		}
 		if (repositorioUsuarios.count() == 0) {
 			crearUsuarios();
+		}
+		if (repositorioMarcas.count() == 0) {
+			crearMarcas();
+		}
+		if (repositorioLigas.count() == 0) {
+			crearLigas();
 		}
 	}
 
@@ -109,6 +124,63 @@ class DataLoader implements CommandLineRunner {
 		} else {
 			throw new RuntimeException("Roles not found in the database");
 		}
+	}
+	private void crearMarcas(){
+		byte[] fotoPorDefectoAdidas = cargarImagenPorDefecto("adidas.jpeg");
+		Marca adidas = new Marca();
+		adidas.setNombre("Adidas");
+		adidas.setFoto(fotoPorDefectoAdidas);
+		repositorioMarcas.save(adidas);
+
+		byte[] fotoPorDefectoNike = cargarImagenPorDefecto("nike.jpg");
+		Marca nike = new Marca();
+		nike.setNombre("Nike");
+		nike.setFoto(fotoPorDefectoNike);
+		repositorioMarcas.save(nike);
+
+		byte[] fotoPorDefectoPuma = cargarImagenPorDefecto("puma.jpg");
+		Marca puma = new Marca();
+		puma.setNombre("Puma");
+		puma.setFoto(fotoPorDefectoPuma);
+		repositorioMarcas.save(puma);
+
+		byte[] fotoPorDefectoKappa = cargarImagenPorDefecto("kappa.jpg");
+		Marca kappa = new Marca();
+		kappa.setNombre("Kappa");
+		kappa.setFoto(fotoPorDefectoKappa);
+		repositorioMarcas.save(kappa);
+	}
+
+	private void crearLigas(){
+		byte[] fotoPorDefectoLaLiga = cargarImagenPorDefecto("laliga.png");
+		Liga laliga = new Liga();
+		laliga.setNombre("LaLiga");
+		laliga.setFoto(fotoPorDefectoLaLiga);
+		repositorioLigas.save(laliga);
+
+		byte[] fotoPorDefectoPremier = cargarImagenPorDefecto("premier.png");
+		Liga premier = new Liga();
+		premier.setNombre("Premier League");
+		premier.setFoto(fotoPorDefectoPremier);
+		repositorioLigas.save(premier);
+
+		byte[] fotoPorDefectoSeriea = cargarImagenPorDefecto("seriea.png");
+		Liga seriea = new Liga();
+		seriea.setNombre("Serie A");
+		seriea.setFoto(fotoPorDefectoSeriea);
+		repositorioLigas.save(seriea);
+
+		byte[] fotoPorDefectoBundes = cargarImagenPorDefecto("bundesliga.jpg");
+		Liga bundes = new Liga();
+		bundes.setNombre("Bundesliga");
+		bundes.setFoto(fotoPorDefectoBundes);
+		repositorioLigas.save(bundes);
+
+		byte[] fotoPorDefectoLigue1 = cargarImagenPorDefecto("ligue1.png");
+		Liga ligue1 = new Liga();
+		ligue1.setNombre("Ligue 1");
+		ligue1.setFoto(fotoPorDefectoLigue1);
+		repositorioLigas.save(ligue1);
 	}
 
 	private byte[] cargarImagenPorDefecto(String nombreArchivo) {

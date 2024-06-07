@@ -30,7 +30,7 @@
           <td>{{ liga.id }}</td>
           <td>{{ liga.nombre }}</td>
           <td>
-            <img [src]="'data:image/jpeg;base64,' + liga.foto" alt="Foto de {{ liga.nombre }}" style="width: 50px; height: 50px;">
+            <img [src]="'data:image/jpeg;base64,' + liga.foto" alt="Foto de {{ liga.nombre }}" style="width: auto; height: 50px;">
           </td>
           <td>
             <button type="button" class="btn" (click)="eliminarLiga(liga.id)" style="background-color: rgb(243, 49, 49); margin-right: 10px; color: white;">Eliminar</button>

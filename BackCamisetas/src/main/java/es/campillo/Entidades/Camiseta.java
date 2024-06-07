@@ -26,6 +26,9 @@ public class Camiseta {
     @Column(name = "Descuento", nullable = false)
     private double descuento;
 
+    @Column(name = "Talla", nullable = false)
+    private String talla;
+
     @Lob
     @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
     private byte[] foto;
