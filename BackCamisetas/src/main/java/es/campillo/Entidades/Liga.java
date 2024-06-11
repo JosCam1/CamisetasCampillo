@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,4 +25,5 @@ public class Liga {
     @Lob
     @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
     private byte[] foto;
+
 }

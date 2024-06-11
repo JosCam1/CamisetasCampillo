@@ -17,10 +17,10 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
   Ligas: Liga[] = [];
   fotoBase64: string = '';
   editando: boolean = false;
-  ligaId!:number;
+  ligaId!: number;
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio: LigasService, private route: ActivatedRoute) { }
+  constructor(private servicio: LigasService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadLigas();
@@ -74,9 +74,9 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
       this.servicio.insertarLiga(data).subscribe(response => {
         console.log(response);
         this.loadLigas();
-        this.cuadroFoto='';
-        this.cuadroNombre='';
-        alert("¡¡Liga Insertada con Exito!!");
+        this.cuadroFoto = ''; 
+        this.cuadroNombre = '';
+        alert("¡¡Liga Insertada con Éxito!!");
       }, error => {
         console.error("Error insertando liga:", error);
         alert("¡¡La liga no se ha podido insertar!!");
@@ -102,14 +102,15 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
   }
 
   editarLiga(id: number): void {
-    this.editando=true;
+    this.editando = true;
     this.subscription.add(
       this.servicio.obtenerLigaById(id).subscribe(
         liga => {
           this.cuadroNombre = liga.nombre;
           this.cuadroFoto = liga.foto;
-          // Asignar el ID de la liga a una propiedad del componente
           this.ligaId = liga.id;
+          // Convertir la imagen de base64 a una imagen visualizable
+          this.fotoBase64 = liga.foto;
         },
         error => {
           console.error("Error obteniendo información de la liga:", error);
@@ -118,15 +119,15 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
       )
     );
   }
-  
+
   onSubmitEdit(): void {
-    this.editando=false;
+    this.editando = false;
     const ligaActualizada: Liga = {
-      id: this.ligaId, 
+      id: this.ligaId,
       nombre: this.cuadroNombre,
-      foto: this.cuadroFoto 
+      foto: this.fotoBase64 // Usar la fotoBase64 editada
     };
-  
+
     // Llamar al servicio para actualizar la liga en el backend
     this.subscription.add(
       this.servicio.actualizarLiga(ligaActualizada).subscribe(
@@ -134,10 +135,11 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
           // Limpia los campos del formulario
           this.cuadroNombre = '';
           this.cuadroFoto = '';
-  
+          this.fotoBase64 = '';
+
           // Vuelve a cargar la lista de ligas actualizada
           this.loadLigas();
-  
+
           // Mostrar un mensaje de éxito
           alert("¡Liga actualizada exitosamente!");
         },
@@ -148,5 +150,4 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
       )
     );
   }
-  
 }

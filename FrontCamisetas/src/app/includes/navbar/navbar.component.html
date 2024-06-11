@@ -30,8 +30,8 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" *ngIf="usuario.rol.id == 1" href="pedidos">Mis Pedidos</a>
-                <a class="dropdown-item" *ngIf="usuario.rol.id == 2 || usuario.rol.id == 3" href="todos-pedidos">Todos los Pedidos</a>
-                <a class="dropdown-item" href="cuenta" *ngIf="usuario.rol.id == 1">Mi Cuenta</a>
+                <a class="dropdown-item" *ngIf="usuario.rol.id == 2" href="todos-pedidos">Todos los Pedidos</a>
+                <a class="dropdown-item" href="micuenta">Mi Cuenta</a>
                 <a class="dropdown-item" (click)="cerrarSesion()" id="cerrarSesion">Cerrar Sesión</a>
               </div>
             </li>
@@ -56,12 +56,15 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
+            <a class="nav-link active" href="">Camisetas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="marcas">Marcas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="ligas">Ligas</a>
           </li>
-          <div *ngIf="usuario?.rol?.id==2||usuario?.rol?.id==3">
+          <div *ngIf="usuario?.rol?.id==2">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,7 +80,7 @@
           </div>
           <div *ngIf="usuario?.rol?.id==3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="crearUsuarios">Crear Usuarios</a>
+              <a class="nav-link active" aria-current="page" href="creacionUsuarios">Crear Usuarios</a>
             </li>
           </div>
         </ul>

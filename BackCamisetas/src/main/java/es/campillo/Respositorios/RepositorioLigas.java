@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepositorioLigas extends JpaRepository<Liga, Long> {
+    Liga findByNombre(String nombre);
 }

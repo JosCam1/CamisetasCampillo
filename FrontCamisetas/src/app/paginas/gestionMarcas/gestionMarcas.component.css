@@ -1,0 +1,26 @@
+tr,
+td,
+th {
+    text-align: center;
+}
+
+.insertar {
+    background-color: #D90148;
+    color: white;
+}
+
+thead {
+    background-color: #D90148;
+}
+
+.linea:hover {
+    opacity: 0.6;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+h2 {
+    text-align: center;
+}

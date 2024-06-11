@@ -1,0 +1,19 @@
+.user-info img {
+    width: 200px;
+    height: 200px;
+}
+
+.user-info {
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo adicional para hacer la imagen de perfil circular */
+.rounded-circle {
+    border-radius: 50%;
+}
+
+/* Estilo adicional para la sombra */
+.shadow-lg {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}

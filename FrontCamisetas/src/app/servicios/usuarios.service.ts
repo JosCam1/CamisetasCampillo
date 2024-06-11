@@ -32,4 +32,11 @@ export class UsuariosService {
     }
     return throwError(() => new Error(errorMessage));
   }
+
+  public obtenerUsuarioById(id: number): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.APIurl}${id}`);
+  }
+  public actualizarUsuario(id: number, usuario: Partial<Usuario>): Observable<void> {
+    return this.httpClient.put<void>(`${this.APIurl}${id}`, usuario);
+  }
 }

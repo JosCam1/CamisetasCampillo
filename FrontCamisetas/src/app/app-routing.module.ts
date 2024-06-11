@@ -9,6 +9,13 @@ import { GestionCamisetasComponent } from './paginas/gestionCamisetas/gestionCam
 import { GestionEquiposComponent } from './paginas/gestionEquipos/gestionEquipos.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { RegistroComponent } from './paginas/registro/registro.component';
+import { LoginService } from './servicios/login.service';
+import { authGuard } from './guards/auth.guard';
+import { ErrorComponent } from './paginas/error/error.component';
+import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
+import { PedidosComponent } from './paginas/pedidos/pedidos.component';
+import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
+import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 
 const routes: Routes = [
   {
@@ -25,19 +32,38 @@ const routes: Routes = [
   },
   {
     path: 'gestionLigas',
-    component: GestionLigasComponent
+    component: GestionLigasComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Admin' }
   },
   {
     path: 'gestionMarcas',
-    component: GestionMarcasComponent
+    component: GestionMarcasComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Admin' }
+  },
+  {
+    path: 'pedidos',
+    component: PedidosComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Cliente' }
+  },
+  {
+    path:'todos-pedidos',
+    component:TodosPedidosComponent,
+    canActivate: [authGuard], data: {expectedRole: 'Admin'}
+  },
+  {
+    path:'creacionUsuarios',
+    component:CreacionUsuariosComponent,
+    canActivate: [authGuard], data: {expectedRole: 'SuperAdmin'}
   },
   {
     path: 'gestionCamisetas',
-    component: GestionCamisetasComponent
+    component: GestionCamisetasComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Admin' }
   },
   {
     path: 'gestionEquipos',
-    component: GestionEquiposComponent
+    component: GestionEquiposComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Admin' }
   },
   {
     path: 'login',
@@ -46,6 +72,18 @@ const routes: Routes = [
   {
     path: 'registro',
     component: RegistroComponent
+  },
+  {
+    path: 'micuenta',
+    component:MicuentaComponent
+  },
+  {
+    path: 'error', 
+    component: ErrorComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/error'
   }
 ];
 

@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-12 text-center mb-4">
+          <div class="user-info">
+              <img [src]="'data:image/jpeg;base64,' + usuario?.foto" alt="Foto de perfil" class="rounded-circle shadow-lg">
+          </div>
+      </div>
+      <div class="col-md-12">
+          <h1 class="text-center">Perfil de Usuario</h1>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="nombre" class="form-label">Nombre:</label>
+                      <input type="text" class="form-control" id="nombre" [value]="usuario?.nombre" [readonly]="estado" [(ngModel)]="usuarioNuevo.nombre">
+                  </div>
+                  <div class="mb-3">
+                      <label for="apellido" class="form-label">Apellido:</label>
+                      <input type="text" class="form-control" id="apellido" [value]="usuario?.apellido" [readonly]="estado" [(ngModel)]="usuarioNuevo.apellido">
+                  </div>
+                  <div class="mb-3">
+                      <label for="email" class="form-label">Email:</label>
+                      <input type="email" class="form-control" id="email" [value]="usuario?.email" [readonly]="estado" [(ngModel)]="usuarioNuevo.email">
+                  </div>
+                  <div class="mb-3">
+                      <label for="telefono" class="form-label">Teléfono:</label>
+                      <input type="tel" class="form-control" id="telefono" [value]="usuario?.telefono" [readonly]="estado" [(ngModel)]="usuarioNuevo.telefono">
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="ciudad" class="form-label">Ciudad:</label>
+                      <input type="text" class="form-control" id="ciudad" [value]="usuario?.ciudad" [readonly]="estado" [(ngModel)]="usuarioNuevo.ciudad">
+                  </div>
+                  <div class="mb-3">
+                      <label for="codigoPostal" class="form-label">Código Postal:</label>
+                      <input type="text" class="form-control" id="codigoPostal" [value]="usuario?.codigoPostal" [readonly]="estado"[(ngModel)]="usuarioNuevo.codigoPostal">
+                  </div>
+                  <div class="mb-3">
+                      <label for="direccion" class="form-label">Dirección:</label>
+                      <textarea class="form-control" id="direccion" rows="4" [(ngModel)]="usuarioNuevo.direccion" [readonly]="estado">{{ usuario?.direccion }} </textarea>
+                  </div>
+                  <button class="btn btn-primary" style="margin-bottom: 20px;" *ngIf="estado==true" (click)="cambiar()">Editar Perfil</button>
+                  <button class="btn btn-primary" style="margin-bottom: 20px;" *ngIf="estado==false" (click)="aplicarCambios()">Aplicar Cambios</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

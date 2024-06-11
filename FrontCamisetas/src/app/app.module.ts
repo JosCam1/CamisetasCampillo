@@ -19,12 +19,18 @@ import { GestionLigasComponent } from './paginas/gestionLigas/gestionLigas.compo
 import { LoginComponent } from './paginas/login/login.component';
 import { RegistroComponent } from './paginas/registro/registro.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ErrorComponent } from './paginas/error/error.component';
+import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
+import { PedidosComponent } from './paginas/pedidos/pedidos.component';
+import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
+import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 
 @NgModule({
   declarations: [
-    AppComponent,NavbarComponent,FooterComponent,CamisetasComponent,
-    LigasComponent,MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent, 
-     GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent
+    AppComponent, NavbarComponent, FooterComponent, CamisetasComponent,
+    LigasComponent, MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent,
+    GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent, 
+    ErrorComponent, MicuentaComponent, PedidosComponent, TodosPedidosComponent, CreacionUsuariosComponent
   ],
   imports: [
     BrowserModule,

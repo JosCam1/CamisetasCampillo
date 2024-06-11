@@ -1,9 +1,6 @@
 package es.campillo.BackCamisetas;
 
-import es.campillo.Entidades.Liga;
-import es.campillo.Entidades.Marca;
-import es.campillo.Entidades.Rol;
-import es.campillo.Entidades.Usuario;
+import es.campillo.Entidades.*;
 import es.campillo.Respositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,18 +37,23 @@ class DataLoader implements CommandLineRunner {
 	private final RepositorioUsuarios repositorioUsuarios;
 	private final RepositorioMarcas repositorioMarcas;
 	private final RepositorioLigas repositorioLigas;
+	private final RepositorioEquipos repositorioEquipos;
 	private final RepositorioCamisetas repositorioCamisetas;
 	private final PasswordEncoder passwordEncoder;
 
 
 
 	@Autowired
-	public DataLoader(RepositorioRoles repositorioRoles, RepositorioUsuarios repositorioUsuarios, PasswordEncoder passwordEncoder, RepositorioMarcas repositorioMarcas,RepositorioLigas repositorioLigas, RepositorioCamisetas repositorioCamisetas) {
+	public DataLoader(RepositorioRoles repositorioRoles,RepositorioEquipos repositorioEquipos,
+					  RepositorioUsuarios repositorioUsuarios, PasswordEncoder passwordEncoder,
+					  RepositorioMarcas repositorioMarcas,RepositorioLigas repositorioLigas,
+					  RepositorioCamisetas repositorioCamisetas) {
 		this.repositorioRoles = repositorioRoles;
 		this.repositorioUsuarios = repositorioUsuarios;
 		this.repositorioMarcas = repositorioMarcas;
 		this.repositorioLigas = repositorioLigas;
 		this.repositorioCamisetas = repositorioCamisetas;
+		this.repositorioEquipos=repositorioEquipos;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -68,6 +70,9 @@ class DataLoader implements CommandLineRunner {
 		}
 		if (repositorioLigas.count() == 0) {
 			crearLigas();
+		}
+		if (repositorioEquipos.count() == 0) {
+			crearEquipos();
 		}
 	}
 
@@ -125,30 +130,38 @@ class DataLoader implements CommandLineRunner {
 			throw new RuntimeException("Roles not found in the database");
 		}
 	}
-	private void crearMarcas(){
-		byte[] fotoPorDefectoAdidas = cargarImagenPorDefecto("adidas.jpeg");
-		Marca adidas = new Marca();
-		adidas.setNombre("Adidas");
-		adidas.setFoto(fotoPorDefectoAdidas);
-		repositorioMarcas.save(adidas);
+	private void crearMarcas() {
+		try {
+			byte[] fotoPorDefectoAdidas = cargarImagenPorDefecto("adidas.jpeg");
+			Marca adidas = new Marca();
+			adidas.setNombre("Adidas");
+			adidas.setFoto(fotoPorDefectoAdidas);
+			repositorioMarcas.save(adidas);
+			System.out.println("Marca Adidas insertada correctamente.");
 
-		byte[] fotoPorDefectoNike = cargarImagenPorDefecto("nike.jpg");
-		Marca nike = new Marca();
-		nike.setNombre("Nike");
-		nike.setFoto(fotoPorDefectoNike);
-		repositorioMarcas.save(nike);
+			byte[] fotoPorDefectoNike = cargarImagenPorDefecto("nike.jpg");
+			Marca nike = new Marca();
+			nike.setNombre("Nike");
+			nike.setFoto(fotoPorDefectoNike);
+			repositorioMarcas.save(nike);
+			System.out.println("Marca Nike insertada correctamente.");
 
-		byte[] fotoPorDefectoPuma = cargarImagenPorDefecto("puma.jpg");
-		Marca puma = new Marca();
-		puma.setNombre("Puma");
-		puma.setFoto(fotoPorDefectoPuma);
-		repositorioMarcas.save(puma);
+			byte[] fotoPorDefectoPuma = cargarImagenPorDefecto("puma.jpg");
+			Marca puma = new Marca();
+			puma.setNombre("Puma");
+			puma.setFoto(fotoPorDefectoPuma);
+			repositorioMarcas.save(puma);
+			System.out.println("Marca Puma insertada correctamente.");
 
-		byte[] fotoPorDefectoKappa = cargarImagenPorDefecto("kappa.jpg");
-		Marca kappa = new Marca();
-		kappa.setNombre("Kappa");
-		kappa.setFoto(fotoPorDefectoKappa);
-		repositorioMarcas.save(kappa);
+			byte[] fotoPorDefectoKappa = cargarImagenPorDefecto("kappa.jpg");
+			Marca kappa = new Marca();
+			kappa.setNombre("Kappa");
+			kappa.setFoto(fotoPorDefectoKappa);
+			repositorioMarcas.save(kappa);
+			System.out.println("Marca Kappa insertada correctamente.");
+		} catch (Exception e) {
+			System.err.println("Error al insertar marcas: " + e.getMessage());
+		}
 	}
 
 	private void crearLigas(){
@@ -181,6 +194,88 @@ class DataLoader implements CommandLineRunner {
 		ligue1.setNombre("Ligue 1");
 		ligue1.setFoto(fotoPorDefectoLigue1);
 		repositorioLigas.save(ligue1);
+	}
+	private void crearEquipos(){
+		Liga laliga = new Liga();
+		laliga = repositorioLigas.findByNombre("LaLiga");
+		Liga premier = new Liga();
+		premier = repositorioLigas.findByNombre("Premier League");
+		Liga bundesliga = new Liga();
+		bundesliga = repositorioLigas.findByNombre("Bundesliga");
+		Liga ligue1 = new Liga();
+		ligue1 = repositorioLigas.findByNombre("Ligue 1");
+		Liga seriea = new Liga();
+		seriea = repositorioLigas.findByNombre("Serie A");
+
+		byte[] fotoPorDefectoMadrid = cargarImagenPorDefecto("madrid.png");
+		Equipo madrid = new Equipo();
+		madrid.setNombre("Real Madrid");
+		madrid.setLiga(laliga);
+		madrid.setFoto(fotoPorDefectoMadrid);
+		repositorioEquipos.save(madrid);
+
+		byte[] fotoPorDefectoBarcelona = cargarImagenPorDefecto("barcelona.png");
+		Equipo barcelona = new Equipo();
+		barcelona.setNombre("FC Barcelona");
+		barcelona.setLiga(laliga);
+		barcelona.setFoto(fotoPorDefectoBarcelona);
+		repositorioEquipos.save(barcelona);
+
+		byte[] fotoPorDefectoCity = cargarImagenPorDefecto("city.png");
+		Equipo city = new Equipo();
+		city.setNombre("Manchester City");
+		city.setLiga(premier);
+		city.setFoto(fotoPorDefectoCity);
+		repositorioEquipos.save(city);
+
+		byte[] fotoPorDefectoLiverpool = cargarImagenPorDefecto("liverpool.png");
+		Equipo liverpool = new Equipo();
+		liverpool.setNombre("Liverpool");
+		liverpool.setLiga(premier);
+		liverpool.setFoto(fotoPorDefectoLiverpool);
+		repositorioEquipos.save(liverpool);
+
+		byte[] fotoPorDefectoJuve = cargarImagenPorDefecto("juve.png");
+		Equipo juve = new Equipo();
+		juve.setNombre("Juventus");
+		juve.setLiga(seriea);
+		juve.setFoto(fotoPorDefectoJuve);
+		repositorioEquipos.save(juve);
+
+		byte[] fotoPorDefectoInter = cargarImagenPorDefecto("inter.png");
+		Equipo inter = new Equipo();
+		inter.setNombre("Inter de Milán");
+		inter.setLiga(seriea);
+		inter.setFoto(fotoPorDefectoInter);
+		repositorioEquipos.save(inter);
+
+		byte[] fotoPorDefectoMonco = cargarImagenPorDefecto("monaco.png");
+		Equipo monaco = new Equipo();
+		monaco.setNombre("Monaco");
+		monaco.setLiga(ligue1);
+		monaco.setFoto(fotoPorDefectoMonco);
+		repositorioEquipos.save(monaco);
+
+		byte[] fotoPorDefectoPSG = cargarImagenPorDefecto("psg.png");
+		Equipo psg = new Equipo();
+		psg.setNombre("Paris Saint Germain");
+		psg.setLiga(ligue1);
+		psg.setFoto(fotoPorDefectoPSG);
+		repositorioEquipos.save(psg);
+
+		byte[] fotoPorDefectoBayern = cargarImagenPorDefecto("bayern.png");
+		Equipo bayern = new Equipo();
+		bayern.setNombre("Bayern de Munich");
+		bayern.setLiga(bundesliga);
+		bayern.setFoto(fotoPorDefectoBayern);
+		repositorioEquipos.save(bayern);
+
+		byte[] fotoPorDefectoBorussia = cargarImagenPorDefecto("borussia.png");
+		Equipo borussia = new Equipo();
+		borussia.setNombre("Real Madrid");
+		borussia.setLiga(bundesliga);
+		borussia.setFoto(fotoPorDefectoBorussia);
+		repositorioEquipos.save(borussia);
 	}
 
 	private byte[] cargarImagenPorDefecto(String nombreArchivo) {

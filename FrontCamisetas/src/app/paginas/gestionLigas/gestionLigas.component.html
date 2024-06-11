@@ -1,13 +1,16 @@
 <div class="container">
+  <h2>Gestion de Ligas</h2>
+</div>
+<div class="container">
   <form (ngSubmit)="editando ? onSubmitEdit() : onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre:</label>
       <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
     </div>
     <div class="input-group mb-3">
-      <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
+      <input type="file" class="form-control" id="foto" accept="image/*" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon">
       <label class="input-group-text" for="foto">Seleccionar archivo</label>
-    </div>
+  </div>
     <button type="submit" class="btn btn-danger mr-1 d-block mx-auto" [class.insertar]="!editando" [class.actualizar]="editando">
       {{ editando ? 'Actualizar Liga' : 'Insertar Liga' }}
     </button>

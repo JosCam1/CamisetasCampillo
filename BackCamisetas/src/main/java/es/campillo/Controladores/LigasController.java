@@ -50,14 +50,18 @@ public class LigasController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarLiga(@PathVariable Long id) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {
-            if (repositorioLigas.existsById(id)) {
+            Optional<Liga> ligaOptional = repositorioLigas.findById(id);
+            if (ligaOptional.isPresent()) {
+                Liga liga = ligaOptional.get();
+
+                // Ahora elimina la liga
                 repositorioLigas.deleteById(id);
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();
             }
         }
-        return null; // Add a return statement in case the condition is not met
+        return null; // Añade una declaración de retorno en caso de que la condición no se cumpla
     }
 
     @GetMapping("/{id}")

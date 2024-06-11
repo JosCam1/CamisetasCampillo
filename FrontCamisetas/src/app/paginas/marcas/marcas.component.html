@@ -1,3 +1,15 @@
-<p>
-  marcas works!
-</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let marca of marcas">
+      <div class="card h-100" (click)="verMarca(marca.id)">
+        <img [src]="'data:image/jpeg;base64,' + marca.foto" [alt]="'Foto de ' + marca.nombre" class="card-img-top fotoLiga" style="object-fit: contain; height: 200px;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">{{ marca.nombre }}</h5>
+          <div *ngIf="usuario?.rol?.id == 2 || usuario?.rol?.id == 3" class="d-flex justify-content-center">
+            <button class="btn btn-danger btn-borrar" (click)="borrarMarca(marca.id)">Borrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
