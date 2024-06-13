@@ -24,7 +24,7 @@ public class Equipo {
     @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
     private byte[] foto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "liga_id")
     private Liga liga;
 }

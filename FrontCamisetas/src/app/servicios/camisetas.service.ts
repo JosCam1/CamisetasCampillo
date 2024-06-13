@@ -19,6 +19,19 @@ export class CamisetasService implements OnInit{
     return this.httpClient.get<Camiseta[]>(`${this.APIurl}`);
   }
 
+  eliminarCamiseta(id:number):Observable<Camiseta>{
+    return this.httpClient.delete<Camiseta>(`${this.APIurl}${id}`);
+  }
 
+  public obtenerCamisetaById(id: number): Observable<Camiseta> {
+    return this.httpClient.get<Camiseta>(`${this.APIurl}${id}`);
+  }
 
+  public insertarCamiseta(camiseta: Camiseta): Observable<Camiseta> {
+    return this.httpClient.post<Camiseta>(`${this.APIurl}`, camiseta);
+  }
+
+  public actualizarCamiseta(camiseta: Camiseta): Observable<Camiseta> {
+    return this.httpClient.put<Camiseta>(`${this.APIurl}${camiseta.id}`, camiseta);
+  }
 }

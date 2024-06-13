@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = "es.campillo")
@@ -73,6 +74,9 @@ class DataLoader implements CommandLineRunner {
 		}
 		if (repositorioEquipos.count() == 0) {
 			crearEquipos();
+		}
+		if (repositorioCamisetas.count() == 0) {
+			crearCamisetas();
 		}
 	}
 
@@ -272,10 +276,145 @@ class DataLoader implements CommandLineRunner {
 
 		byte[] fotoPorDefectoBorussia = cargarImagenPorDefecto("borussia.png");
 		Equipo borussia = new Equipo();
-		borussia.setNombre("Real Madrid");
+		borussia.setNombre("Borussia Dortmund");
 		borussia.setLiga(bundesliga);
 		borussia.setFoto(fotoPorDefectoBorussia);
 		repositorioEquipos.save(borussia);
+	}
+
+	public void crearCamisetas() {
+
+		Optional<Equipo> realmadridOptional = repositorioEquipos.findById(1L);
+		Optional<Equipo> barcelonaOptional = repositorioEquipos.findById(2L);
+		Optional<Equipo> cityOptional = repositorioEquipos.findById(3L);
+		Optional<Equipo> liverpoolOptional = repositorioEquipos.findById(4L);
+		Optional<Equipo> jueventusOptional = repositorioEquipos.findById(5L);
+		Optional<Equipo> interOptional = repositorioEquipos.findById(6L);
+		Optional<Equipo> monacoOptional = repositorioEquipos.findById(7L);
+		Optional<Equipo> psgOptional = repositorioEquipos.findById(8L);
+		Optional<Equipo> bayernOptional = repositorioEquipos.findById(9L);
+		Optional<Equipo> borussiaOptional = repositorioEquipos.findById(10L);
+
+		if (realmadridOptional.isPresent()) {
+			Equipo realmadrid = realmadridOptional.get();
+			Equipo barcelona = barcelonaOptional.get();
+			Equipo city = cityOptional.get();
+			Equipo liverpool = liverpoolOptional.get();
+			Equipo juventus = jueventusOptional.get();
+			Equipo inter = interOptional.get();
+			Equipo monaco = monacoOptional.get();
+			Equipo psg = psgOptional.get();
+			Equipo bayern = bayernOptional.get();
+			Equipo borussia = borussiaOptional.get();
+
+			Marca adidas = repositorioMarcas.findByNombre("Adidas");
+			Marca nike = repositorioMarcas.findByNombre("Nike");
+			Marca puma = repositorioMarcas.findByNombre("Puma");
+			Marca kappa = repositorioMarcas.findByNombre("Kappa");
+
+			byte[] fotoPorDefectoMadrid = cargarImagenPorDefecto("camisetareal.jpg");
+			Camiseta camisetamadrid = new Camiseta();
+			camisetamadrid.setNombre("Camiseta Real Madrid 2023/2024");
+			camisetamadrid.setDescripcion("1ª Equipación del Real Madrid de la temporada 2023/2024");
+			camisetamadrid.setFoto(fotoPorDefectoMadrid);
+			camisetamadrid.setMarca(adidas);
+			camisetamadrid.setPrecio(35);
+			camisetamadrid.setEquipo(realmadrid);
+			repositorioCamisetas.save(camisetamadrid);
+
+			byte[] fotoPorDefectoBarcelona = cargarImagenPorDefecto("camisetabarcelona.jpg");
+			Camiseta casmietabarcelona = new Camiseta();
+			casmietabarcelona.setNombre("Camiseta FC Barcelona 2023/2024");
+			casmietabarcelona.setDescripcion("1ª Equipación del FC Barcelona de la temporada 2023/2024");
+			casmietabarcelona.setFoto(fotoPorDefectoBarcelona);
+			casmietabarcelona.setMarca(nike);
+			casmietabarcelona.setPrecio(34);
+			casmietabarcelona.setEquipo(barcelona);
+			repositorioCamisetas.save(casmietabarcelona);
+
+			byte[] fotoPorDefectoCity = cargarImagenPorDefecto("camisetacity.png");
+			Camiseta camisetacity = new Camiseta();
+			camisetacity.setNombre("Camiseta Manchester City 2023/2024");
+			camisetacity.setDescripcion("1ª Equipación del Manchester City de la temporada 2023/2024");
+			camisetacity.setFoto(fotoPorDefectoCity);
+			camisetacity.setMarca(nike);
+			camisetacity.setPrecio(37);
+			camisetacity.setEquipo(city);
+			repositorioCamisetas.save(camisetacity);
+
+			byte[] fotoPorDefectoLiverpool = cargarImagenPorDefecto("camisetaliverpool.png");
+			Camiseta camisetaliverpool = new Camiseta();
+			camisetaliverpool.setNombre("Camiseta Liverpool 2023/2024");
+			camisetaliverpool.setDescripcion("1ª Equipación del Liverpool de la temporada 2023/2024");
+			camisetaliverpool.setFoto(fotoPorDefectoLiverpool);
+			camisetaliverpool.setMarca(kappa);
+			camisetaliverpool.setPrecio(35);
+			camisetaliverpool.setEquipo(liverpool);
+			repositorioCamisetas.save(camisetaliverpool);
+
+			byte[] fotoPorDefectoPSG = cargarImagenPorDefecto("camisetapsg.png");
+			Camiseta camisetapsg = new Camiseta();
+			camisetapsg.setNombre("Camiseta Paris Saint Germain 2023/2024");
+			camisetapsg.setDescripcion("1ª Equipación del Paris Saint Germain de la temporada 2023/2024");
+			camisetapsg.setFoto(fotoPorDefectoPSG);
+			camisetapsg.setMarca(nike);
+			camisetapsg.setPrecio(34);
+			camisetapsg.setEquipo(psg);
+			repositorioCamisetas.save(camisetapsg);
+
+			byte[] fotoPorDefectoMonaco = cargarImagenPorDefecto("camisetamonaco.png");
+			Camiseta casmietamonaco = new Camiseta();
+			casmietamonaco.setNombre("Camiseta Monaco 2023/2024");
+			casmietamonaco.setDescripcion("1ª Equipación del Monaco de la temporada 2023/2024");
+			casmietamonaco.setFoto(fotoPorDefectoMonaco);
+			casmietamonaco.setMarca(kappa);
+			casmietamonaco.setPrecio(37.5);
+			casmietamonaco.setEquipo(monaco);
+			repositorioCamisetas.save(casmietamonaco);
+
+			byte[] fotoPorDefectoJuve = cargarImagenPorDefecto("camisetajuve.png");
+			Camiseta casmietajuve = new Camiseta();
+			casmietajuve.setNombre("Camiseta Juventus 2023/2024");
+			casmietajuve.setDescripcion("1ª Equipación de la Juventus de Turín de la temporada 2023/2024");
+			casmietajuve.setFoto(fotoPorDefectoJuve);
+			casmietajuve.setMarca(adidas);
+			casmietajuve.setPrecio(34.7);
+			casmietajuve.setEquipo(juventus);
+			repositorioCamisetas.save(casmietajuve);
+
+			byte[] fotoPorDefectoInter = cargarImagenPorDefecto("camisetainter.png");
+			Camiseta camisetainter = new Camiseta();
+			camisetainter.setNombre("Camiseta Inter de Milán 2023/2024");
+			camisetainter.setDescripcion("1ª Equipación del Inter de Milán de la temporada 2023/2024");
+			camisetainter.setFoto(fotoPorDefectoInter);
+			camisetainter.setMarca(nike);
+			camisetainter.setPrecio(34.99);
+			camisetainter.setEquipo(inter);
+			repositorioCamisetas.save(camisetainter);
+
+			byte[] fotoPorDefectoBorussia = cargarImagenPorDefecto("camisetaborussia.png");
+			Camiseta camisetaborussia = new Camiseta();
+			camisetaborussia.setNombre("Camiseta Borussia Dortmund 2023/2024");
+			camisetaborussia.setDescripcion("1ª Equipación del Borussia Dortmund de la temporada 2023/2024");
+			camisetaborussia.setFoto(fotoPorDefectoBorussia);
+			camisetaborussia.setMarca(puma);
+			camisetaborussia.setPrecio(34);
+			camisetaborussia.setEquipo(borussia);
+			repositorioCamisetas.save(camisetaborussia);
+
+			byte[] fotoPorDefectoBayern = cargarImagenPorDefecto("camisetabayern.png");
+			Camiseta camisetabayern = new Camiseta();
+			camisetabayern.setNombre("Camiseta Bayern de Munich 2023/2024");
+			camisetabayern.setDescripcion("1ª Equipación del Bayern de Munich de la temporada 2023/2024");
+			camisetabayern.setFoto(fotoPorDefectoBayern);
+			camisetabayern.setMarca(adidas);
+			camisetabayern.setPrecio(35.77);
+			camisetabayern.setEquipo(bayern);
+			repositorioCamisetas.save(camisetabayern);
+
+		} else {
+			System.out.println("No se encontró el equipo con el ID proporcionado.");
+		}
 	}
 
 	private byte[] cargarImagenPorDefecto(String nombreArchivo) {

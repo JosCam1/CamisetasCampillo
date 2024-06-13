@@ -84,7 +84,7 @@ export class GestionMarcasComponent implements OnInit {
   }
 
   eliminarMarca(id: number) {
-    if (confirm("¿Estás seguro de que quieres eliminar la marca?")) {
+    if (confirm("¿Estás seguro de que quieres eliminar la marca, se eliminaran todas las camisetas que contengan esa marca?")) {
       this.subscription.add(
         this.servicio.eliminarMarca(id).subscribe(
           () => {

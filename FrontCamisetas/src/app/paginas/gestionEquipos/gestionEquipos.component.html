@@ -1,3 +1,61 @@
-<p>
-  gestionEquipos works!
-</p>
+<div class="container">
+  <h2>Gestión de Equipos</h2>
+</div>
+<div class="container">
+  <form (ngSubmit)="editando ? onSubmitEdit() : onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
+    </div>
+    <div class="mb-3">
+      <label for="liga" class="form-label">Liga:</label>
+      <select id="liga" class="form-control" [(ngModel)]="ligaSeleccionadaId" name="liga" required>
+        <option *ngFor="let liga of ligas; let i = index" [value]="i">{{ liga.nombre }}</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
+      <label class="input-group-text" for="foto">Seleccionar archivo</label>
+    </div>
+    <button type="submit" class="btn btn-danger mr-1 d-block mx-auto" [class.insertar]="!editando" [class.actualizar]="editando">
+      {{ editando ? 'Actualizar Equipo' : 'Insertar Equipo' }}
+    </button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Liga</th>
+          <th>Foto</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equipos">
+          <td>{{ equipo.id }}</td>
+          <td>{{ equipo.nombre }}</td>
+          <td>
+            <ng-container *ngIf="equipo.liga">
+              <img [src]="'data:image/jpeg;base64,' + equipo.liga.foto" alt="Foto de {{ equipo.liga.nombre }}" style="width: auto; height: 50px;">
+            </ng-container>
+            <ng-container *ngIf="!equipo.liga">
+              Sin liga
+            </ng-container>
+          </td>
+          <td>
+            <img [src]="'data:image/jpeg;base64,' + equipo.foto" alt="Foto de {{ equipo.nombre }}" style="width: auto; height: 50px;">
+          </td>
+          <td>
+            <button type="button" class="btn" (click)="eliminarEquipo(equipo.id)" style="background-color: rgb(243, 49, 49); margin-right: 10px; color: white;">Eliminar</button>
+            <button type="button" class="btn" (click)="editarEquipo(equipo.id)" style="background-color: rgb(91, 228, 228);color: white;">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

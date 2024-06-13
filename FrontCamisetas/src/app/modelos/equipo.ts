@@ -3,6 +3,6 @@ import { Liga } from "./liga";
 export class Equipo {
     id!:number;
     nombre!:string;
-    foto!:Blob;
+    foto!:string;
     liga!:Liga;
 }

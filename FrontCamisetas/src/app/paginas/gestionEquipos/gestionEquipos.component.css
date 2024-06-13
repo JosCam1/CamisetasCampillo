@@ -1,0 +1,51 @@
+tr,
+td,
+th {
+    text-align: center;
+}
+
+.insertar {
+    background-color: #D90148;
+    color: white;
+}
+
+thead {
+    background-color: #D90148;
+}
+
+.linea:hover {
+    opacity: 0.6;
+}
+
+.input-group-text {
+    cursor: pointer;
+}
+
+h2 {
+    text-align: center;
+}
+
+.custom-file-input {
+    color: transparent;
+}
+.custom-file-input:hover {
+    cursor: pointer;
+}
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Seleccionar archivo';
+    color: #fff;
+    background-color: #007bff;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.custom-file-input:hover::before {
+    background-color: #0056b3;
+}
+.custom-file-input:active::before {
+    background-color: #004cba;
+}

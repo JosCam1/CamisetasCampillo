@@ -1,36 +1,31 @@
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
-.card-img-top {
+  .card-img-top {
     height: 300px;
     object-fit: cover;
-}
+  }
 
-.fotoCamiseta {
+  .fotoCamiseta {
     height: 400px;
-}
+  }
 
-.card:hover {
+  .card:hover {
     box-shadow: 0 0 10px gray;
     transform: translateY(-5px);
     transition: transform 0.3s ease;
     cursor: pointer;
-}
+  }
 
-.pagination .page-link {
+  .pagination .page-link {
     color: #d90148;
-}
+  }
 
-.pagination {
+  .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
+  }
 
-.pagination button {
+  .pagination button {
     background-color: white;
     color: #d90148;
     border: 0.5px solid #d90148;
@@ -40,23 +35,36 @@
     cursor: pointer;
     transition: background-color 0.3s;
     margin-bottom: 10px;
-}
+  }
 
-.pagination button.active {
+  .pagination button.active {
     background-color: #d90148;
     color: white;
     border: 1px solid #d90148;
-}
+  }
 
-.btn-borrar {
+  .btn-borrar {
     background-color: #d90148;
     color: white;
     border: none;
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-}
+  }
 
-.btn-borrar:hover {
+  .btn-borrar:hover {
     background-color: #b3003d;
-}
+  }
+
+  .custom-search {
+    border-radius: 25px !important;
+  }
+
+  .input-group-text {
+    background-color: transparent !important;
+    border-color: #ced4da !important;
+    cursor: pointer;
+  }
+  *{
+    color:black;
+  }

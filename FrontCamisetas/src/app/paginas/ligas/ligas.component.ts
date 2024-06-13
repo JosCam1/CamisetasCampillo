@@ -4,6 +4,7 @@ import { LigasService } from '../../servicios/ligas.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../../servicios/login.service';
 import { Usuario } from '../../modelos/usuario';
+import { Router } from '@angular/router'; // Importar el Router
 
 @Component({
   selector: 'app-ligas',
@@ -11,22 +12,26 @@ import { Usuario } from '../../modelos/usuario';
   styleUrls: ['./ligas.component.css']
 })
 export class LigasComponent implements OnInit {
-  ligas:Liga[] = [];
+  ligas: Liga[] = [];
   usuario: Usuario | null = null;
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicio:LigasService, private servicioUsuarios:LoginService) { }
+  constructor(
+    private servicio: LigasService,
+    private servicioUsuarios: LoginService,
+    private router: Router // Inyectar el Router
+  ) {}
 
   ngOnInit() {
     this.loadLigas();
     this.servicioUsuarios.getUsuario().subscribe(
-       Usuario => {
+      (Usuario) => {
         this.usuario = Usuario;
       },
       (error) => {
         console.error("Error encontrando usuario: ", error);
       }
-    )
+    );
   }
 
   loadLigas() {
@@ -42,11 +47,7 @@ export class LigasComponent implements OnInit {
     );
   }
 
-  verLiga(id:number){
-
-  }
-
-  borrarLiga(id:number){
+  borrarLiga(id: number) {
     if (confirm("¿Estás seguro de que quieres eliminar la liga, todos los equipos que pertenezcan a la misma tambien se eliminaran?")) {
       this.subscription.add(
         this.servicio.eliminarLiga(id).subscribe(

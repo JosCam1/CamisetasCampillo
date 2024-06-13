@@ -1,0 +1,78 @@
+<div class="container">
+  <h2>Gestión de Camisetas</h2>
+</div>
+<div class="container">
+  <form (ngSubmit)="editando ? onSubmitEdit() : onSubmit()" class="p-4 bg-light rounded shadow-sm mt-4">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
+    </div>
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio:</label>
+      <input type="number" id="precio" class="form-control" [(ngModel)]="cuadroPrecio" name="precio" required />
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción:</label>
+      <textarea id="descripcion" class="form-control" [(ngModel)]="cuadroDescripcion" name="descripcion" rows="4" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="marca" class="form-label">Marca:</label>
+      <select id="marca" class="form-control" [(ngModel)]="marcaSeleccionadaId" name="marca" required>
+        <option *ngFor="let marca of marcas" [value]="marca.id">{{ marca.nombre }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="equipo" class="form-label">Equipo:</label>
+      <select id="equipo" class="form-control" [(ngModel)]="equipoSeleccionadoId" name="equipo" required>
+        <option *ngFor="let equipo of equipos" [value]="equipo.id">{{ equipo.nombre }}</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <input type="file" id="foto" class="form-control" (change)="onFileSelected($event)" accept="image/*" aria-describedby="inputGroupFileAddon">
+      <label class="input-group-text" for="foto">Seleccionar archivo</label>
+    </div>
+    <button type="submit" class="btn btn-danger mr-1 d-block mx-auto" [class.insertar]="!editando" [class.actualizar]="editando">
+      {{ editando ? 'Actualizar Camiseta' : 'Insertar Camiseta' }}
+    </button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Descripción</th>
+          <th>Marca</th>
+          <th>Equipo</th>
+          <th>Foto</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let camiseta of camisetas">
+          <td>{{ camiseta.id }}</td>
+          <td>{{ camiseta.nombre }}</td>
+          <td>{{ camiseta.precio }}</td>
+          <td>{{ camiseta.descripcion }}</td>
+          <td>
+            <img [src]="'data:image/jpeg;base64,' + camiseta.marca.foto" alt="Foto de {{ camiseta.nombre }}" style="width: auto; height: 50px;">
+          </td>
+          <td>
+            <img [src]="'data:image/jpeg;base64,' + camiseta.equipo.foto" alt="Foto de {{ camiseta.nombre }}" style="width: auto; height: 50px;">
+          </td>
+          <td>
+            <img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.nombre }}" style="width: auto; height: 50px;">
+          </td>
+          <td>
+            <button type="button" class="btn" (click)="eliminarCamiseta(camiseta.id)" style="background-color: rgb(243, 49, 49); margin-right: 10px; color: white;">Eliminar</button>
+            <button type="button" class="btn" (click)="editarCamiseta(camiseta.id)" style="background-color: rgb(91, 228, 228);color: white;">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

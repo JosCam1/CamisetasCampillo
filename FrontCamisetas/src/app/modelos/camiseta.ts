@@ -4,12 +4,11 @@ import { Marca } from "./marca";
 
 export class Camiseta {
     id!:number;
+    nombre!:string;
     precio!:number;
     descripcion!:string;
-    decuento!:number;
-    talla!:string;
-    foto!:Blob;
-    liga!:Liga;
+    foto!:string;
+    equipo!:Equipo;
     marca!:Marca;
 
 }

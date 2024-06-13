@@ -16,6 +16,7 @@ import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
 import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
+import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
     path:'todos-pedidos',
     component:TodosPedidosComponent,
     canActivate: [authGuard], data: {expectedRole: 'Admin'}
+  },
+  {
+    path: 'verCamisetas',
+    component:VerCamisetasComponent
   },
   {
     path:'creacionUsuarios',

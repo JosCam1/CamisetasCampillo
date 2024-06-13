@@ -1,7 +1,9 @@
 package es.campillo.Controladores;
 
+import es.campillo.Entidades.Camiseta;
 import es.campillo.Entidades.Liga;
 import es.campillo.Entidades.Marca;
+import es.campillo.Respositorios.RepositorioCamisetas;
 import es.campillo.Respositorios.RepositorioMarcas;
 import es.campillo.Servicios.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.Optional;
 public class MarcasController {
     @Autowired
     RepositorioMarcas repositorioMarcas;
+
+    @Autowired
+    RepositorioCamisetas repositorioCamisetas;
 
     @Autowired
     Session session;
@@ -52,13 +57,18 @@ public class MarcasController {
     public ResponseEntity<?> eliminarMarca(@PathVariable Long id) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {
             if (repositorioMarcas.existsById(id)) {
+                // Eliminar todas las camisetas asociadas a la marca
+                List<Camiseta> camisetasAsociadas = repositorioCamisetas.findByMarcaId(id);
+                repositorioCamisetas.deleteAll(camisetasAsociadas);
+
+                // Eliminar la marca
                 repositorioMarcas.deleteById(id);
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @GetMapping("/{id}")

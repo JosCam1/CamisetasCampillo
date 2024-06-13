@@ -8,7 +8,7 @@
       <input type="text" id="nombre" class="form-control" [(ngModel)]="cuadroNombre" name="nombre" required />
     </div>
     <div class="input-group mb-3">
-      <input type="file" class="form-control" id="foto" accept="image/*" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon">
+      <input type="file" class="form-control" id="foto" accept="image/*" (change)="onFileSelected($event)" aria-describedby="inputGroupFileAddon" required>
       <label class="input-group-text" for="foto">Seleccionar archivo</label>
   </div>
     <button type="submit" class="btn btn-danger mr-1 d-block mx-auto" [class.insertar]="!editando" [class.actualizar]="editando">

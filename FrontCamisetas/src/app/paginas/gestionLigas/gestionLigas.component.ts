@@ -85,7 +85,7 @@ export class GestionLigasComponent implements OnInit, OnDestroy {
   }
 
   eliminarLiga(id: number) {
-    if (confirm("¿Estás seguro de que quieres eliminar la liga?")) {
+    if (confirm("¿Estás seguro de que quieres eliminar la liga, se eliminaran también todos los equipos que pertenezcan a esa liga y a su vez todas las camisetas que pertenezcan a esos equipos?")) {
       this.subscription.add(
         this.servicio.eliminarLiga(id).subscribe(
           () => {

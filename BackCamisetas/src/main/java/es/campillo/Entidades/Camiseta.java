@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -17,25 +18,22 @@ public class Camiseta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Nombre", nullable = false)
+    private String nombre;
+
     @Column(name = "Precio", nullable = false)
     private double precio;
 
     @Column(name = "Descripción", nullable = false, length = 256)
     private String descripcion;
 
-    @Column(name = "Descuento", nullable = false)
-    private double descuento;
-
-    @Column(name = "Talla", nullable = false)
-    private String talla;
-
     @Lob
     @Column(name = "Foto", nullable = false, columnDefinition = "longblob")
     private byte[] foto;
 
     @ManyToOne
-    @JoinColumn(name = "liga_id")
-    private Liga liga;
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
 
     @ManyToOne
     @JoinColumn(name = "marca_id")

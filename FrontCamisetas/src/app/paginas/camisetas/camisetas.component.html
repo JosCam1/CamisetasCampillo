@@ -1,22 +1,35 @@
-<div class="container">
-  <h1 *ngIf="usuario?.rol?.id==2" style="text-align: center;">Bienvenido de nuevo ADMIN</h1>
-  <h1 *ngIf="usuario?.rol?.id==3" style="text-align: center;">Bienvenido de nuevo SUPERADMIN</h1>
+<div class="container text-center">
+  <h1 *ngIf="usuario?.rol?.id==2">Bienvenido de nuevo ADMIN</h1>
+  <h1 *ngIf="usuario?.rol?.id==3">Bienvenido de nuevo SUPERADMIN</h1>
 </div>
+
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4" *ngFor="let camiseta of camisetas | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage">
-      <a href="vercamiseta/{{camiseta.id}}" style="text-decoration: none;">
-        <div class="card" style="margin-bottom: 20px;">
-          <img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.descripcion }}" class="fotoCamiseta">
-          <div class="card-body">
-            <h5 class="card-title">{{camiseta.descripcion}}</h5>
-            <p class="card-text">Precio: {{camiseta.precio}}€</p>
-            <div *ngIf="usuario?.rol?.id==2 || usuario?.rol?.id==3">
-              <button class="btn-borrar">Borrar</button>
-            </div>
+  <div class="row mb-4">
+    <div class="col-md-8 mb-2">
+      <div class="input-group">
+        <input type="text" class="form-control custom-search" placeholder="Buscar camiseta..." [(ngModel)]="searchText" (input)="applyFilters()">
+      </div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <select class="form-control custom-select" [(ngModel)]="selectedMarca" (change)="applyFilters()">
+        <option value="">Filtrar por marca</option>
+        <option *ngFor="let marca of marcas" [value]="marca.nombre">{{ marca.nombre }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let camiseta of filteredCamisetas | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage">
+      <div class="card h-100 border-0 shadow">
+        <a href="verCamisetas"><img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.descripcion }}" class="card-img-top fotoCamiseta"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{camiseta.nombre}}</h5>
+          <p class="card-text">Precio: {{camiseta.precio}}€</p>
+          <div *ngIf="usuario?.rol?.id==2 || usuario?.rol?.id==3">
+            <button class="btn btn-danger btn-borrar" (click)="borrarCamiseta(camiseta.id)">Borrar</button>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>

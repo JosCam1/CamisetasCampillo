@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-4 mb-4" *ngFor="let liga of ligas">
-      <div class="card h-100" (click)="verLiga(liga.id)">
+      <div class="card h-100" >
         <img [src]="'data:image/jpeg;base64,' + liga.foto" [alt]="'Foto de ' + liga.nombre" class="card-img-top fotoLiga" style="object-fit: contain; height: 200px;">
         <div class="card-body">
           <h5 class="card-title" style="text-align: center;">{{ liga.nombre }}</h5>
