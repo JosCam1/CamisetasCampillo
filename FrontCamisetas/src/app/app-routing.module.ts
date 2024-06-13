@@ -14,7 +14,6 @@ import { authGuard } from './guards/auth.guard';
 import { ErrorComponent } from './paginas/error/error.component';
 import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
-import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
 import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
 
@@ -45,11 +44,6 @@ const routes: Routes = [
     path: 'pedidos',
     component: PedidosComponent,
     canActivate: [authGuard], data: { expectedRole: 'Cliente' }
-  },
-  {
-    path:'todos-pedidos',
-    component:TodosPedidosComponent,
-    canActivate: [authGuard], data: {expectedRole: 'Admin'}
   },
   {
     path: 'verCamisetas',

@@ -22,7 +22,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ErrorComponent } from './paginas/error/error.component';
 import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
-import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
 import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
 
@@ -31,7 +30,7 @@ import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.compo
     AppComponent, NavbarComponent, FooterComponent, CamisetasComponent,
     LigasComponent, MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent,
     GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent, 
-    ErrorComponent, MicuentaComponent, PedidosComponent, TodosPedidosComponent, CreacionUsuariosComponent,
+    ErrorComponent, MicuentaComponent, PedidosComponent, CreacionUsuariosComponent,
     VerCamisetasComponent
   ],
   imports: [

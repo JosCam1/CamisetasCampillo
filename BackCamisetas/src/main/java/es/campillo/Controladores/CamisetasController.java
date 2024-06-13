@@ -29,6 +29,7 @@ public class CamisetasController {
     public List<Camiseta> listarTodasCamisetas(){
         return respositorioCamisetas.findAll();
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarCamiseta(@PathVariable Long id) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {

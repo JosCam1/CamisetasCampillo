@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootApplication(scanBasePackages = "es.campillo")
 @EntityScan(basePackages = "es.campillo")
@@ -40,6 +39,7 @@ class DataLoader implements CommandLineRunner {
 	private final RepositorioLigas repositorioLigas;
 	private final RepositorioEquipos repositorioEquipos;
 	private final RepositorioCamisetas repositorioCamisetas;
+	private final RepositorioPedidos repositorioPedidos;
 	private final PasswordEncoder passwordEncoder;
 
 
@@ -48,13 +48,14 @@ class DataLoader implements CommandLineRunner {
 	public DataLoader(RepositorioRoles repositorioRoles,RepositorioEquipos repositorioEquipos,
 					  RepositorioUsuarios repositorioUsuarios, PasswordEncoder passwordEncoder,
 					  RepositorioMarcas repositorioMarcas,RepositorioLigas repositorioLigas,
-					  RepositorioCamisetas repositorioCamisetas) {
+					  RepositorioCamisetas repositorioCamisetas, RepositorioPedidos repositorioPedidos) {
 		this.repositorioRoles = repositorioRoles;
 		this.repositorioUsuarios = repositorioUsuarios;
 		this.repositorioMarcas = repositorioMarcas;
 		this.repositorioLigas = repositorioLigas;
 		this.repositorioCamisetas = repositorioCamisetas;
 		this.repositorioEquipos=repositorioEquipos;
+		this.repositorioPedidos=repositorioPedidos;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -78,6 +79,10 @@ class DataLoader implements CommandLineRunner {
 		if (repositorioCamisetas.count() == 0) {
 			crearCamisetas();
 		}
+		if (repositorioPedidos.count() == 0) {
+			List<Long> idsCamisetas = Arrays.asList(1L, 2L);
+			crearPedidos(3L, idsCamisetas);
+		}
 	}
 
 	private void crearRoles() {
@@ -96,13 +101,16 @@ class DataLoader implements CommandLineRunner {
 	private void crearUsuarios() {
 		Optional<Rol> rolAdminOptional = repositorioRoles.findByNombre("Admin");
 		Optional<Rol> rolSuperAdminOptional = repositorioRoles.findByNombre("SuperAdmin");
+		Optional<Rol> rolClienteOptional = repositorioRoles.findByNombre("Cliente");
 
 		if (rolAdminOptional.isPresent() && rolSuperAdminOptional.isPresent()) {
 			Rol rolAdmin = rolAdminOptional.get();
 			Rol rolSuperAdmin = rolSuperAdminOptional.get();
+			Rol rolCliente = rolClienteOptional.get();
 
 			byte[] fotoPorDefectoAdmin = cargarImagenPorDefecto("admin.jpg");
 			byte[] fotoPorDefectoSuperAdmin = cargarImagenPorDefecto("superadmin.jpg");
+			byte[] fotoPorDefectoCliente = cargarImagenPorDefecto("cliente.jpg");
 
 			Usuario usuarioAdmin = new Usuario();
 			usuarioAdmin.setEmail("admin@gmail.com");
@@ -128,8 +136,21 @@ class DataLoader implements CommandLineRunner {
 			usuarioSuperAdmin.setPassword(passwordEncoder.encode("superadmin123"));
 			usuarioSuperAdmin.setRol(rolSuperAdmin);
 
+			Usuario usuarioCliente = new Usuario();
+			usuarioCliente.setEmail("pepe@gmail.com");
+			usuarioCliente.setNombre("Pepe");
+			usuarioCliente.setApellido("Diaz");
+			usuarioCliente.setCiudad("Madrid");
+			usuarioCliente.setCodigoPostal("42000");
+			usuarioCliente.setTelefono(666666666);
+			usuarioCliente.setDireccion("Avenida de los Gobernadores");
+			usuarioCliente.setFoto(fotoPorDefectoCliente);
+			usuarioCliente.setPassword(passwordEncoder.encode("123456"));
+			usuarioCliente.setRol(rolCliente);
+
 			repositorioUsuarios.save(usuarioAdmin);
 			repositorioUsuarios.save(usuarioSuperAdmin);
+			repositorioUsuarios.save(usuarioCliente);
 		} else {
 			throw new RuntimeException("Roles not found in the database");
 		}
@@ -415,6 +436,29 @@ class DataLoader implements CommandLineRunner {
 		} else {
 			System.out.println("No se encontró el equipo con el ID proporcionado.");
 		}
+	}
+
+	public void crearPedidos(Long idUsuario, List<Long> idsCamisetas) {
+		// Obtener el usuario por su ID
+		Usuario usuario = new Usuario();
+		usuario.setId(idUsuario);
+
+		// Obtener las camisetas por sus IDs
+		List<Camiseta> camisetas = new ArrayList<>();
+		for (Long idCamiseta : idsCamisetas) {
+			Optional<Camiseta> camisetaOptional = repositorioCamisetas.findById(idCamiseta);
+			camisetaOptional.ifPresent(camisetas::add);
+		}
+
+		// Crear el objeto Pedido
+		Pedido pedido = new Pedido();
+		pedido.setFecha(new Date());  // Fecha actual
+		pedido.setEstado("En proceso");  // Estado inicial
+		pedido.setUsuario(usuario);  // Asignar el usuario
+		pedido.setCamisetas(camisetas);  // Asignar las camisetas seleccionadas
+
+		// Guardar el pedido en la base de datos
+		repositorioPedidos.save(pedido);
 	}
 
 	private byte[] cargarImagenPorDefecto(String nombreArchivo) {
