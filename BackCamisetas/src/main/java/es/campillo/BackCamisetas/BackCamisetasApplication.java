@@ -452,12 +452,12 @@ class DataLoader implements CommandLineRunner {
 
 		// Crear el objeto Pedido
 		Pedido pedido = new Pedido();
-		pedido.setFecha(new Date());  // Fecha actual
-		pedido.setEstado("En proceso");  // Estado inicial
-		pedido.setUsuario(usuario);  // Asignar el usuario
-		pedido.setCamisetas(camisetas);  // Asignar las camisetas seleccionadas
+		pedido.setFecha(new Date());
+		pedido.setEstado("Pendiente de Pago");
+		pedido.setUsuario(usuario);
+		pedido.setImporte(69);
+		pedido.setCamisetas(camisetas);
 
-		// Guardar el pedido en la base de datos
 		repositorioPedidos.save(pedido);
 	}
 

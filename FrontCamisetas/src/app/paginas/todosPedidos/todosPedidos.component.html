@@ -1,0 +1,42 @@
+<div class="container">
+  <h2 class="text-center mb-4">Aquí todos los pedidos</h2>
+
+  <div *ngFor="let pedido of pedidos" class="pedido-card">
+    <div class="pedido-header">
+      <h5>Pedido #{{ pedido.id }}</h5>
+      <span>Fecha: {{ pedido.fecha | date:'yyyy-MM-dd' }}</span>
+    </div>
+    <div class="estado-pedido">Estado: {{ pedido.estado }}</div>
+    <div class="importe-pedido">Importe: {{ pedido.importe | number:'1.2-2' }}€</div>
+    <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#collapseUsuario' + pedido.id" aria-expanded="false" aria-controls="collapseUsuario">
+      Ver Datos del Usuario
+    </button>
+    <div class="collapse" [attr.id]="'collapseUsuario' + pedido.id">
+      <div class="card card-body">
+        <h6>Datos del Usuario</h6>
+        <p>Nombre: {{ pedido.usuario.nombre }}</p>
+        <p>Apellidos: {{ pedido.usuario.apellido }}</p>
+        <p>Telefono: {{ pedido.usuario.telefono }}</p>
+        <p>Ciudad: {{ pedido.usuario.ciudad }}</p>
+        <p>Codigo Postal: {{ pedido.usuario.codigoPostal }}</p>
+        <p>Direccion: {{ pedido.usuario.direccion }}</p>
+        <p>Email: {{ pedido.usuario.email }}</p>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="marcarComoPagado(pedido)">
+      Cambiar estado del producto
+    </button>
+    <hr>
+    <div *ngFor="let camiseta of pedido.camisetas" class="camiseta-item">
+      <img [src]="'data:image/jpeg;base64,' + camiseta.foto" [alt]="'Foto de ' + camiseta.nombre">
+      <div class="camiseta-info">
+        <h6>{{ camiseta.nombre }}</h6>
+        <p>{{ camiseta.precio | number:'1.2-2' }}€</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="pedidos.length === 0" class="text-center mt-4">
+    <p>No tienes pedidos registrados.</p>
+  </div>
+</div>

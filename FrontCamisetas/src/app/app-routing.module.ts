@@ -16,6 +16,8 @@ import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
+import { CarritoComponent } from './paginas/carrito/carrito.component';
+import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
 
 const routes: Routes = [
   {
@@ -46,13 +48,23 @@ const routes: Routes = [
     canActivate: [authGuard], data: { expectedRole: 'Cliente' }
   },
   {
-    path: 'verCamisetas',
-    component:VerCamisetasComponent
+    path: 'todosPedidos',
+    component: TodosPedidosComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Admin' }
   },
   {
-    path:'creacionUsuarios',
-    component:CreacionUsuariosComponent,
-    canActivate: [authGuard], data: {expectedRole: 'SuperAdmin'}
+    path: 'carrito',
+    component: CarritoComponent,
+    canActivate: [authGuard], data: { expectedRole: 'Cliente' }
+  },
+  {
+    path: 'verCamisetas/:id',
+    component: VerCamisetasComponent
+  },
+  {
+    path: 'creacionUsuarios',
+    component: CreacionUsuariosComponent,
+    canActivate: [authGuard], data: { expectedRole: 'SuperAdmin' }
   },
   {
     path: 'gestionCamisetas',
@@ -74,10 +86,10 @@ const routes: Routes = [
   },
   {
     path: 'micuenta',
-    component:MicuentaComponent
+    component: MicuentaComponent
   },
   {
-    path: 'error', 
+    path: 'error',
     component: ErrorComponent
   },
   {

@@ -24,14 +24,17 @@ import { MicuentaComponent } from './paginas/micuenta/micuenta.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUsuarios.component';
 import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
+import { CarritoComponent } from './paginas/carrito/carrito.component';
+import { CarritoService } from './servicios/carrito.service';
+import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
 
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, FooterComponent, CamisetasComponent,
     LigasComponent, MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent,
     GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent, 
-    ErrorComponent, MicuentaComponent, PedidosComponent, CreacionUsuariosComponent,
-    VerCamisetasComponent
+    ErrorComponent, MicuentaComponent, PedidosComponent, CreacionUsuariosComponent,CarritoComponent,
+    VerCamisetasComponent, TodosPedidosComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.compo
     NgxPaginationModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),CarritoService
   ],
   bootstrap: [AppComponent]
 })

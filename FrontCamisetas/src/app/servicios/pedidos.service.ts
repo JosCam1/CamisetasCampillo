@@ -21,4 +21,25 @@ export class PedidosService {
       })
     );
   }
+
+  obtenerPedidos(): Observable<Pedido[]> {
+    const url = `${this.APIurl}`;
+    return this.httpClient.get<Pedido[]>(url).pipe(
+      catchError(error => {
+        console.error('Error obteniendo todos los pedidos:', error);
+        return throwError('Error al obtener todos los pedidos. Por favor, intenta de nuevo más tarde.');
+      })
+    );
+  }
+
+  cambiarEstadoPedido(id: number): Observable<Pedido> {
+    const url = `${this.APIurl}${id}/cambiarEstado`;
+    return this.httpClient.put<Pedido>(url, {}).pipe(
+      catchError(error => {
+        console.error('Error cambiando estado del pedido:', error);
+        return throwError('Error al cambiar estado del pedido. Por favor, intenta de nuevo más tarde.');
+      })
+    );
+  }
+
 }

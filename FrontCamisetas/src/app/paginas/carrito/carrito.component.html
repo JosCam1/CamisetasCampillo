@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h1>Carrito de Compras</h1>
+  <div *ngIf="carrito.length > 0; else carritoVacio">
+    <div class="list-group">
+      <div *ngFor="let camiseta of carrito" class="list-group-item">
+        <div class="row">
+          <div class="col-md-2">
+            <img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.descripcion }}" class="img-fluid img-thumbnail">
+          </div>
+          <div class="col-md-7">
+            <h5>{{ camiseta.nombre }}</h5>
+            <p>{{ camiseta.descripcion }}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="text-right"><strong>{{ camiseta.precio | number:'1.2-2' }}€</strong></p>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-link text-danger" (click)="eliminarDelCarrito(camiseta)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-right mt-3">
+      <h4>Total: {{ totalPrecio() | number:'1.2-2' }}€</h4>
+      <button class="btn btn-primary" (click)="comprarCarrito()">Comprar</button>
+    </div>
+  </div>
+  <ng-template #carritoVacio>
+    <p>El carrito está vacío.</p>
+  </ng-template>
+</div>

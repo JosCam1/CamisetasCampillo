@@ -24,6 +24,9 @@ public class Pedido {
     @Column(name = "Estado")
     private String estado;
 
+    @Column(name = "Importe")
+    private double importe;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

@@ -14,7 +14,7 @@
         <div class="col-6 col-md-2 d-none d-md-flex flex-row align-items-center" *ngIf="usuario?.rol?.id==1">
           <span class="shop-bag"><i id="shop-bag-icon" class='bx bxs-shopping-bag'></i></span>
           <div class="d-flex flex-column ms-2">
-            <a href="cesta" style="text-decoration: none; color:#d90148;">Mi Cesta</a>
+            <a href="carrito" style="text-decoration: none; color:#d90148;">Mi Cesta</a>
           </div>
         </div>
         <div class="col-12 col-md-1 text-end d-none d-md-block" *ngIf="!usuario">
@@ -30,7 +30,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" *ngIf="usuario.rol.id == 1" href="pedidos">Mis Pedidos</a>
-                <a class="dropdown-item" *ngIf="usuario.rol.id == 2" href="pedidos">Todos los Pedidos</a>
+                <a class="dropdown-item" *ngIf="usuario.rol.id == 2" href="todosPedidos">Todos los Pedidos</a>
                 <a class="dropdown-item" href="micuenta">Mi Cuenta</a>
                 <a class="dropdown-item" (click)="cerrarSesion()" id="cerrarSesion">Cerrar Sesión</a>
               </div>

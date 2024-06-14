@@ -10,4 +10,5 @@ import java.util.List;
 public interface RepositorioCamisetas extends JpaRepository<Camiseta, Long> {
     List<Camiseta> findByMarcaId(Long marcaId);
     List<Camiseta> findByEquipoId(Long equipoId);
+
 }

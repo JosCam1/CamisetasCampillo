@@ -39,6 +39,8 @@ export class CamisetasComponent implements OnInit {
         console.error("Error obteniendo usuario:", error);
       }
     );
+
+    
   }
 
   obtenerCamisetas() {
@@ -83,7 +85,7 @@ export class CamisetasComponent implements OnInit {
   }
 
   borrarCamiseta(id: number) {
-    if (confirm("¿Estás seguro de que quieres eliminar la camiseta?")) {
+    if (confirm("¿Estás seguro de que quieres eliminar la camiseta? Se borrarán también de los pedidos existentes")) {
       this.servicio.eliminarCamiseta(id).subscribe(
         () => {
           alert("Camiseta eliminada exitosamente!");
@@ -97,4 +99,5 @@ export class CamisetasComponent implements OnInit {
       )
     }
   }
+
 }

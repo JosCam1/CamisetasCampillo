@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center mb-4">Aquí tienes tus pedidos {{usuario?.nombre}}</h2>
+  <h2 class="text-center mb-4">Aquí tienes tus pedidos {{ usuario?.nombre }}</h2>
 
   <div *ngFor="let pedido of pedidos" class="pedido-card">
     <div class="pedido-header">
@@ -7,12 +7,13 @@
       <span>Fecha: {{ pedido.fecha | date:'yyyy-MM-dd' }}</span>
     </div>
     <div class="estado-pedido">Estado: {{ pedido.estado }}</div>
+    <div class="importe-pedido">Importe: {{ pedido.importe }}€</div>
     <hr>
     <div *ngFor="let camiseta of pedido.camisetas" class="camiseta-item">
       <img [src]="'data:image/jpeg;base64,' + camiseta.foto" [alt]="'Foto de ' + camiseta.nombre">
       <div class="camiseta-info">
         <h6>{{ camiseta.nombre }}</h6>
-        <p>{{ camiseta.precio}}€</p>
+        <p>{{ camiseta.precio }}€</p>
       </div>
     </div>
   </div>

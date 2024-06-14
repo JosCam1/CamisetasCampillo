@@ -3,14 +3,18 @@ package es.campillo.Controladores;
 import es.campillo.Entidades.Camiseta;
 import es.campillo.Entidades.Equipo;
 import es.campillo.Entidades.Liga;
+import es.campillo.Entidades.Pedido;
 import es.campillo.Respositorios.RepositorioCamisetas;
+import es.campillo.Respositorios.RepositorioPedidos;
 import es.campillo.Servicios.Session;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +27,9 @@ public class CamisetasController {
     RepositorioCamisetas respositorioCamisetas;
 
     @Autowired
+    RepositorioPedidos repositorioPedidos;
+
+    @Autowired
     Session session;
 
     @GetMapping("/")
@@ -31,23 +38,29 @@ public class CamisetasController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> eliminarCamiseta(@PathVariable Long id) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {
             Optional<Camiseta> camisetaOptional = respositorioCamisetas.findById(id);
             if (camisetaOptional.isPresent()) {
                 Camiseta camiseta = camisetaOptional.get();
 
+                // Eliminar todas las relaciones en la tabla intermedia
+                repositorioPedidos.eliminarPedidosPorCamiseta(id);
 
+                // Luego eliminar la camiseta
                 respositorioCamisetas.deleteById(id);
+
                 return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.notFound().build();
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-    @PostMapping("/")
+
+@PostMapping("/")
     public Camiseta insertarCamiseta(@RequestBody Camiseta camiseta) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {
             String fotoBase64 = Base64.getEncoder().encodeToString(camiseta.getFoto());

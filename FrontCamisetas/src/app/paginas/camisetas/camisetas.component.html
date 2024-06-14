@@ -21,7 +21,7 @@
   <div class="row justify-content-center">
     <div class="col-md-4 mb-4" *ngFor="let camiseta of filteredCamisetas | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage">
       <div class="card h-100 border-0 shadow">
-        <a href="verCamisetas"><img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.descripcion }}" class="card-img-top fotoCamiseta"></a>
+        <a [routerLink]="['/verCamisetas', camiseta.id]"><img [src]="'data:image/jpeg;base64,' + camiseta.foto" alt="Foto de {{ camiseta.descripcion }}" class="card-img-top fotoCamiseta"></a>
         <div class="card-body">
           <h5 class="card-title">{{camiseta.nombre}}</h5>
           <p class="card-text">Precio: {{camiseta.precio}}€</p>
