@@ -3,8 +3,10 @@ package es.campillo.Controladores;
 import es.campillo.Entidades.Camiseta;
 import es.campillo.Entidades.Equipo;
 import es.campillo.Entidades.Liga;
+import es.campillo.Entidades.Pedido;
 import es.campillo.Respositorios.RepositorioCamisetas;
 import es.campillo.Respositorios.RepositorioEquipos;
+import es.campillo.Respositorios.RepositorioPedidos;
 import es.campillo.Servicios.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ public class EquiposController {
 
     @Autowired
     RepositorioCamisetas repositorioCamisetas;
+
+    @Autowired
+    RepositorioPedidos repositorioPedidos;
 
     @Autowired
     Session session;
@@ -56,12 +61,22 @@ public class EquiposController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarEquipo(@PathVariable Long id) {
         if (session.getUsuario().getRol().getId() == 1 || session.getUsuario().getRol().getId() == 2) {
-            if (repositorioEquipos.existsById(id)) {
-                // Eliminar todas las camisetas asociadas a la marca
-                List<Camiseta> camisetasAsociadas = repositorioCamisetas.findByMarcaId(id);
+            Optional<Equipo> equipoOptional = repositorioEquipos.findById(id);
+
+            if (equipoOptional.isPresent()) {
+                Equipo equipo = equipoOptional.get();
+
+                // Eliminar todas las camisetas asociadas al equipo
+                List<Camiseta> camisetasAsociadas = repositorioCamisetas.findByEquipoId(id);
                 repositorioCamisetas.deleteAll(camisetasAsociadas);
 
-                // Eliminar la marca
+                // Eliminar los pedidos que contienen las camisetas asociadas al equipo
+                for (Camiseta camiseta : camisetasAsociadas) {
+                    List<Pedido> pedidosAsociados = repositorioPedidos.findByCamisetaId(camiseta.getId());
+                    repositorioPedidos.deleteAll(pedidosAsociados);
+                }
+
+                // Finalmente, eliminar el equipo
                 repositorioEquipos.deleteById(id);
                 return ResponseEntity.ok().build();
             } else {

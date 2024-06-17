@@ -15,7 +15,7 @@ export class MicuentaComponent implements OnInit {
   estado: boolean = true;
   private subscription: Subscription = new Subscription();
 
-  constructor(private servicioLogin: LoginService, private servicioUsuario: UsuariosService, private cd: ChangeDetectorRef) { }
+  constructor(private servicioLogin: LoginService, private servicioUsuario: UsuariosService, private cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     this.obtenerUsuario();
@@ -50,6 +50,7 @@ export class MicuentaComponent implements OnInit {
       usuario => {
         if (usuario) {
           this.usuario = usuario;
+          this.cd.detectChanges(); 
           this.usuarioNuevo = { ...usuario }; 
         }
       },

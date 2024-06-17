@@ -20,4 +20,6 @@ public interface RepositorioPedidos extends JpaRepository<Pedido, Long> {
     @Query(value = "DELETE FROM pedido_camiseta WHERE camiseta_id = :camisetaId", nativeQuery = true)
     void eliminarPedidosPorCamiseta(Long camisetaId);
 
+    @Query("SELECT p FROM Pedido p JOIN p.camisetas c WHERE c.id = :camisetaId")
+    List<Pedido> findByCamisetaId(Long camisetaId);
 }
