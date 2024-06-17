@@ -7,7 +7,7 @@
       <span>Fecha: {{ pedido.fecha | date:'yyyy-MM-dd' }}</span>
     </div>
     <div class="estado-pedido">Estado: {{ pedido.estado }}</div>
-    <div class="importe-pedido">Importe: {{ pedido.importe }}€</div>
+    <div class="importe-pedido">Importe: {{ pedido.importe | number:'1.2-2'}}€</div>
     <hr>
     <div *ngFor="let camiseta of pedido.camisetas" class="camiseta-item">
       <img [src]="'data:image/jpeg;base64,' + camiseta.foto" [alt]="'Foto de ' + camiseta.nombre">

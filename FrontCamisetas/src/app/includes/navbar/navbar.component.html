@@ -1,47 +1,35 @@
 <header class="section-header">
   <section class="header-main border-bottom bg-white">
     <div class="container-fluid">
-      <div class="row p-2 pt-3 pb-3 align-items-center justify-content-center">
-        <div class="col-6 col-md-3 text-center text-md-left" style="margin-bottom: 10px;">
+      <div class="row p-2 pt-3 pb-3 align-items-center">
+        <div class="col-12 col-md-3 text-center text-md-start mb-2 mb-md-0">
           <a href=""><img class="img-fluid" src="assets/images/logoCamisetas.png" width="100" alt="Logo"></a>
         </div>
-        <div class="col-12 col-md-6">
-          <div class="d-flex form-inputs">
-            <input class="form-control" type="text" placeholder="Busca tu camiseta...">
-            <i class="bx bx-search"></i>
+        <div class="col-12 col-md-6 text-center">
+          <h1 class="navbar-title">Spain Camisetas</h1>
+        </div>
+        <div class="col-12 col-md-3 text-center text-md-end d-flex align-items-center justify-content-end">
+          <div *ngIf="usuario?.rol?.id==1" class="d-flex align-items-center justify-content-end me-3">
+            <span class="shop-bag"><i id="shop-bag-icon" class='bx bxs-shopping-bag'></i></span>
+            <div class="d-flex flex-column ms-2">
+              <a href="carrito" class="text-decoration-none text-danger">Mi Cesta</a>
+            </div>
           </div>
-        </div>
-        <div class="col-6 col-md-2 d-none d-md-flex flex-row align-items-center" *ngIf="usuario?.rol?.id==1">
-          <span class="shop-bag"><i id="shop-bag-icon" class='bx bxs-shopping-bag'></i></span>
-          <div class="d-flex flex-column ms-2">
-            <a href="carrito" style="text-decoration: none; color:#d90148;">Mi Cesta</a>
+          <div *ngIf="!usuario" class="ms-3">
+            <a href="login"><button class="btn btn-danger text-white">Iniciar Sesión</button></a>
           </div>
-        </div>
-        <div class="col-12 col-md-1 text-end d-none d-md-block" *ngIf="!usuario">
-          <a href="login"><button class="btn" style="background-color: #d90148; color: white;">Iniciar Sesión</button></a>
-        </div>
-        <div class="col-12 col-md-1 text-end d-none d-md-block" *ngIf="usuario">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle profile-link" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img [src]="'data:image/jpeg;base64,' + usuario.foto" alt="Foto de {{ usuario.nombre }}"
-                  class="profile-image rounded-circle"> <span class="profile-name">Mi Perfil</span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" *ngIf="usuario.rol.id == 1" href="pedidos">Mis Pedidos</a>
-                <a class="dropdown-item" *ngIf="usuario.rol.id == 2" href="todosPedidos">Todos los Pedidos</a>
-                <a class="dropdown-item" href="micuenta">Mi Cuenta</a>
-                <a class="dropdown-item" (click)="cerrarSesion()" id="cerrarSesion">Cerrar Sesión</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="col-12 d-block d-md-none text-end" *ngIf="usuario">
-          <a class="profile-link" href="#">
-            <img [src]="'data:image/jpeg;base64,' + usuario.foto" alt="Foto de {{ usuario.nombre }}"
-              class="profile-image rounded-circle"> <span class="profile-name">Mi Perfil</span>
-          </a>
+          <div *ngIf="usuario" class="dropdown ms-3">
+            <a class="profile-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img [src]="'data:image/jpeg;base64,' + usuario.foto" alt="Foto de {{ usuario.nombre }}" class="profile-image rounded-circle">
+              <span class="profile-name">Mi Perfil</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" *ngIf="usuario.rol.id == 1" href="pedidos">Mis Pedidos</a>
+              <a class="dropdown-item" *ngIf="usuario.rol.id == 2" href="todosPedidos">Todos los Pedidos</a>
+              <a class="dropdown-item" href="micuenta">Mi Cuenta</a>
+              <a class="dropdown-item" (click)="cerrarSesion()" id="cerrarSesion">Cerrar Sesión</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -49,8 +37,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -59,30 +46,25 @@
             <a class="nav-link active" href="">Camisetas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="marcas">Marcas</a>
+            <a class="nav-link active" href="marcas">Marcas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="ligas">Ligas</a>
           </li>
-          <div *ngIf="usuario?.rol?.id==2">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Gestiones Internas
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="gestionMarcas">Gestión Marcas</a>
-                <a class="dropdown-item" href="gestionLigas">Gestión Ligas</a>
-                <a class="dropdown-item" href="gestionEquipos">Gestión Equipos</a>
-                <a class="dropdown-item" href="gestionCamisetas">Gestión Camisetas</a>
-              </div>
-            </li>
-          </div>
-          <div *ngIf="usuario?.rol?.id==3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="creacionUsuarios">Crear Usuarios</a>
-            </li>
-          </div>
+          <li class="nav-item dropdown" *ngIf="usuario?.rol?.id==2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Gestiones Internas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="gestionMarcas">Gestión Marcas</a>
+              <a class="dropdown-item" href="gestionLigas">Gestión Ligas</a>
+              <a class="dropdown-item" href="gestionEquipos">Gestión Equipos</a>
+              <a class="dropdown-item" href="gestionCamisetas">Gestión Camisetas</a>
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="usuario?.rol?.id==3">
+            <a class="nav-link active" href="creacionUsuarios">Crear Usuarios</a>
+          </li>
         </ul>
       </div>
     </div>

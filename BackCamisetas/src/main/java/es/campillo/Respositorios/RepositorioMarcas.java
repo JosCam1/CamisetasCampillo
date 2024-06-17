@@ -11,9 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioMarcas extends JpaRepository<Marca, Long> {
     Marca findByNombre(String nombre);
-
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Equipo e WHERE e.liga = :liga")
-    void deleteByLiga(Liga liga);
 }

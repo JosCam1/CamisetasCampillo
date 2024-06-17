@@ -18,6 +18,7 @@ import { CreacionUsuariosComponent } from './paginas/creacionUsuarios/creacionUs
 import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.component';
 import { CarritoComponent } from './paginas/carrito/carrito.component';
 import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
+import { SobremiComponent } from './paginas/sobremi/sobremi.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'gestionLigas',
     component: GestionLigasComponent,
     canActivate: [authGuard], data: { expectedRole: 'Admin' }
+  },
+  {
+    path: 'sobremi',
+    component: SobremiComponent
   },
   {
     path: 'gestionMarcas',

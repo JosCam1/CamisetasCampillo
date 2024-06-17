@@ -27,6 +27,7 @@ import { VerCamisetasComponent } from './paginas/verCamisetas/verCamisetas.compo
 import { CarritoComponent } from './paginas/carrito/carrito.component';
 import { CarritoService } from './servicios/carrito.service';
 import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.component';
+import { SobremiComponent } from './paginas/sobremi/sobremi.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { TodosPedidosComponent } from './paginas/todosPedidos/todosPedidos.compo
     LigasComponent, MarcasComponent, GestionCamisetasComponent, GestionEquiposComponent,
     GestionMarcasComponent, GestionLigasComponent, LoginComponent, RegistroComponent, 
     ErrorComponent, MicuentaComponent, PedidosComponent, CreacionUsuariosComponent,CarritoComponent,
-    VerCamisetasComponent, TodosPedidosComponent
+    VerCamisetasComponent, TodosPedidosComponent, SobremiComponent
   ],
   imports: [
     BrowserModule,

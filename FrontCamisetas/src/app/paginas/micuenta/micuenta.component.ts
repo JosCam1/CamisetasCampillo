@@ -33,7 +33,6 @@ export class MicuentaComponent implements OnInit {
           () => {
             alert("Usuario actualizado correctamente");
             console.log('Usuario actualizado correctamente');
-            this.obtenerUsuario();
           },
           error => {
             console.error('Error al actualizar el usuario:', error);

@@ -1,5 +1,4 @@
 import { Equipo } from "./equipo";
-import { Liga } from "./liga";
 import { Marca } from "./marca";
 
 export class Camiseta {

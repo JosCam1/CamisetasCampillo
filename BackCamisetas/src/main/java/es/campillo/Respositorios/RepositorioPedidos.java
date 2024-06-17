@@ -15,16 +15,9 @@ public interface RepositorioPedidos extends JpaRepository<Pedido, Long> {
 
     List<Pedido> findByUsuarioId(Long usuarioId);
 
-    @Query(value = "SELECT p.id FROM Pedido p JOIN p.camisetas c WHERE c.id = :camisetaId")
-    List<Long> findIdsPedidosPorCamiseta(Long camisetaId);
-
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM pedido_camiseta WHERE camiseta_id = :camisetaId", nativeQuery = true)
     void eliminarPedidosPorCamiseta(Long camisetaId);
 
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE Pedido p SET p.importe = :importe WHERE p.id = :pedidoId")
-    void actualizarImportePedido(Long pedidoId, BigDecimal importe);
 }
